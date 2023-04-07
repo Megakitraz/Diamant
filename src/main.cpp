@@ -1,9 +1,8 @@
-#include <string_view>
-#include "application.h"
+#include "core/application.h"
 
 int main()
 {
-	application& app = application::get_application();
+	application& app = application::instance();
 	app.run();
 	return 0;
 }
