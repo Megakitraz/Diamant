@@ -1,12 +1,14 @@
 #pragma once
 
 #include "core/lobby/lobby.h"
-#include "screen/screen.h"
+#include "scene/scene.h"
 
-class lobby_screen : public screen
+class lobby_scene : public scene
 {
     public:
-        lobby_screen(lobby& lobby);
+        lobby_scene(lobby& lobby);
+
+        void update() override;
         void render() override;
 
     private:

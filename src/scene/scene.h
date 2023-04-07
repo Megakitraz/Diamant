@@ -2,8 +2,9 @@
 
 #include <raylib.h>
 
-class screen
+class scene
 {
     public:
+        virtual void update() = 0;
         virtual void render() = 0;
 };

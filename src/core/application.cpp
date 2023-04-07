@@ -1,7 +1,7 @@
 #include "core/application.h"
 #include <raylib.h>
 
-#include "screen/lobby_screen.h"
+#include "scene/lobby_scene.h"
 
 constexpr int window_width = 1280;
 constexpr int window_height = 720;
@@ -9,7 +9,7 @@ constexpr int target_fps = 60;
 
 application::application()
 {
-    screen = std::make_unique<lobby_screen>(lobby);
+    scene = std::make_unique<lobby_scene>(lobby);
 }
 
 void application::run()
@@ -19,8 +19,9 @@ void application::run()
 
 	while (!WindowShouldClose())
 	{
+        scene->update();
         BeginDrawing();
-        screen->render();
+        scene->render();
         EndDrawing();
     }
 
