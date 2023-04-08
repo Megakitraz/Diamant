@@ -1,27 +1,29 @@
 #include "core/application.h"
+#include "scene/splash_screen/splash_screen_scene.h"
+#include "scene/lobby/lobby_scene.h"
+#include "utils/constants.h"
 #include <raylib.h>
-
-#include "scene/lobby_scene.h"
-
-constexpr int window_width = 1280;
-constexpr int window_height = 720;
-constexpr int target_fps = 60;
 
 application::application()
 {
-    scene = std::make_unique<lobby_scene>(lobby);
+    scene_manager& scene_manager = scene_manager::instance();
+    scene_manager.add_scene("splash_screen", std::make_unique<splash_screen_scene>(), true);
+    scene_manager.add_scene("lobby", std::make_unique<lobby_scene>());
 }
 
 void application::run()
 {
-    InitWindow(window_width, window_height, "Diamant");
-	SetTargetFPS(target_fps);
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Diamant");
+	SetTargetFPS(WINDOW_TARGET_FPS);
 
 	while (!WindowShouldClose())
 	{
-        scene->update();
+        scene& scene = scene_manager::instance().get_current_scene();
+
+        scene.update();
+
         BeginDrawing();
-        scene->render();
+        scene.render();
         EndDrawing();
     }
 
