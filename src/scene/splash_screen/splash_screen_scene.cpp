@@ -1,11 +1,12 @@
 #include "scene/splash_screen/splash_screen_scene.h"
 #include "utils/drawing.h"
+#include "scene/scene_manager.h"
 
 void splash_screen_scene::update() {
     const float delta_time_sec = GetFrameTime();
     current_time_ms += static_cast<int>(delta_time_sec * 1000);
     if (current_time_ms >= visible_for_ms) {
-        //scene_manager::get().set_scene(scene_type::LOBBY);
+        scene_manager::instance().switch_to("lobby");
     }
 }
 
