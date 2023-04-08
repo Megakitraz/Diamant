@@ -16,5 +16,5 @@ class scene_manager : public singleton<scene_manager>
 
     private:
         std::unordered_map<std::string, std::unique_ptr<scene>> scenes;
-        std::unique_ptr<scene> current_scene = nullptr;
+        scene* current_scene = nullptr;
 };
