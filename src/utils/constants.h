@@ -6,9 +6,11 @@ constexpr int WINDOW_HEIGHT = 720;
 constexpr int WINDOW_TARGET_FPS = 60;
 
 /* SPLASH SCREEN CONSTANTS */
-constexpr int SPLASH_SCREEN_DURATION_MS = 2000;
+constexpr int SPLASH_SCREEN_DURATION_MS = 500;
 
 /* INGAME CONSTANTS */
+constexpr float GAME_BOT_WAIT_TIME_SEC = 2.0f;
+
 constexpr int GAME_MIN_PLAYER = 1;
 constexpr int GAME_MAX_PLAYER = 8;
 
