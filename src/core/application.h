@@ -8,4 +8,7 @@ class application : public singleton<application>
     public:
         application();
         void run();
+
+    private:
+        scene_manager scene_manager_;
 };

@@ -6,7 +6,7 @@
 #include <memory>
 #include <string>
 
-class scene_manager : public singleton<scene_manager>
+class scene_manager
 {
     public:
         void add_scene(std::string const& name, std::unique_ptr<scene> scene, bool active = false);
