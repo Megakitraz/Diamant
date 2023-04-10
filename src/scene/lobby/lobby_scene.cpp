@@ -1,10 +1,7 @@
 #include "scene/lobby/lobby_scene.h"
 #include "utils/constants.h"
 #include "utils/drawing.h"
-
-#define RAYGUI_IMPLEMENTATION
-#include <raygui.h>
-#undef RAYGUI_IMPLEMENTATION
+#include <raygui/raygui.h>
 
 lobby_scene::lobby_scene(scene_manager& scene_manager) : scene_manager_(scene_manager){}
 
