@@ -17,3 +17,12 @@ void DrawTimer(long time_ms, int fontSize, Color color)
     const int y = 10;
     DrawText(time.c_str(), x, y, fontSize, color);
 }
+
+void DrawRound(int current, int max, int fontSize, Color color)
+{
+    const std::string round = "Round " + std::to_string(current) + "/" + std::to_string(max);
+    const int text_width = MeasureText(round.c_str(), fontSize);
+    const int x = (GetScreenWidth() - text_width) / 2;
+    const int y = 10;
+    DrawText(round.c_str(), x, y, fontSize, color);
+}
