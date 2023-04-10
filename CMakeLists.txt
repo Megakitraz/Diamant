@@ -7,14 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
 
-find_package(raylib CONFIG)
+find_package(raylib CONFIG REQUIRED)
 
-if(NOT raylib_FOUND)
-    include_directories(${CMAKE_SOURCE_DIR}/include/raylib)
-    link_directories(lib)
-endif()
-
-include_directories(${CMAKE_SOURCE_DIR}/include/raygui)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 add_executable (${PROJECT_NAME} ${SOURCES})
