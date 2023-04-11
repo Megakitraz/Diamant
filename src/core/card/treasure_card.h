@@ -4,10 +4,11 @@
 
 class treasure_card : public card
 {
+    public:
+        treasure_card(int diamonds);
+        void load_texture() override;
 
-public:
-
-private:
-    int diamonds = 0;
+    private:
+        int diamonds;
 
 };
