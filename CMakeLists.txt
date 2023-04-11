@@ -10,7 +10,7 @@ file(GLOB_RECURSE SOURCES src/*.cpp)
 find_package(raylib CONFIG REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
-include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${CMAKE_SOURCE_DIR}/src/)
 
 add_executable (${PROJECT_NAME} ${SOURCES})
 
