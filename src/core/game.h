@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "core/player.h"
-#include "core/bot.h"
+#include "core/player/player.h"
+#include "core/player/bot.h"
 #include "core/round.h"
 
 class game

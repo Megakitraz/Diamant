@@ -37,12 +37,13 @@ void game_scene::render()
     if (player.get_action() == Action::Waiting)
     {
         if (GuiButton({ 500, 600, 100, 50 }, "Continue"))
-            player.set_action(Action::MoveForward);
+        {
+            player.continue_exploring();
+        }
 
         if (GuiButton({ 650, 600, 100, 50 }, "Leave"))
         {
-            player.set_action(Action::Leave);
-            player.set_exploring(false);
+            player.finish_exploring();
         }
     }
     else
