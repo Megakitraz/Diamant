@@ -1,11 +1,17 @@
 #pragma once
 
-#include "core/action.h"
-
 class player
 {
 
 public:
+
+    enum class Action
+    {
+        Waiting,
+        MoveForward,
+        Leave
+    };
+
     player();
 
     void set_score(int score);
@@ -21,3 +27,5 @@ private:
     bool in_exploration;
     Action action;
 };
+
+using Action = player::Action;
