@@ -8,6 +8,7 @@ class splash_screen_scene : public scene
 {
     public:
         splash_screen_scene(scene_manager& scene_manager);
+        void activate() override;
         void update() override;
         void render() override;
 

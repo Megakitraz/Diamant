@@ -17,6 +17,7 @@ void scene_manager::switch_to(std::string const& name)
     const bool scene_exists = it != scenes.end();
     assert( scene_exists && "Scene not found" );
     current_scene = it->second.get();
+    current_scene->activate();
 }
 
 scene& scene_manager::get_current_scene() const

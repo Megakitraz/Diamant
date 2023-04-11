@@ -5,6 +5,11 @@
 
 lobby_scene::lobby_scene(scene_manager& scene_manager) : scene_manager_(scene_manager){}
 
+void lobby_scene::activate()
+{
+    lobby_ = std::make_unique<lobby>();
+}
+
 void lobby_scene::update() {}
 
 void lobby_scene::render()

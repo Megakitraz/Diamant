@@ -3,11 +3,13 @@
 #include "scene/scene.h"
 #include "scene/scene_manager.h"
 #include "core/game.h"
+#include <memory>
 
 class game_scene : public scene
 {
     public:
         game_scene(scene_manager& scene_manager);
+        void activate() override;
         void update() override;
         void render() override;
 
@@ -15,5 +17,5 @@ class game_scene : public scene
         scene_manager& scene_manager_;
         
         long current_time_ms = 0;
-        game game_;
+        std::unique_ptr<game> game_ = nullptr;
 };
