@@ -3,6 +3,7 @@
 #include "scene/lobby/lobby_scene.h"
 #include "scene/game/game_scene.h"
 #include "utils/constants.h"
+#include "utils/logger.h"
 #include <raylib.h>
 
 application::application()
