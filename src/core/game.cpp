@@ -1,6 +1,12 @@
 #include "core/game.h"
+#include "utils/constants.h"
 
-diamant::game::game() : round_count(5) {}
+diamant::game::game() : round_count(5) 
+{
+    const float moving_forward_probability = 0.8f;
+    for(int i = 0; i<GAME_BOT_COUNT; i++)
+        bots.emplace_back(moving_forward_probability);
+}
 
 void diamant::game::start()
 {
