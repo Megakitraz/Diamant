@@ -1,6 +1,5 @@
 #include "core/card/treasure_card.h"
 #include <string>
-#include "utils/logger.h"
 
 treasure_card::treasure_card(int diamonds) : 
     card(diamant::card_type::Treasure), 

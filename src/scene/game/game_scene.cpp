@@ -2,10 +2,10 @@
 #include "core/card/card.h"
 #include "utils/constants.h"
 #include "utils/drawing.h"
-#include "utils/logger.h"
 #include <raylib.h>
 #include <raygui/raygui.h>
 #include <algorithm>
+#include <iostream>
 
 game_scene::game_scene(scene_manager& scene_manager) : scene_manager_(scene_manager) {}
 
@@ -19,10 +19,17 @@ void game_scene::update()
 {
     const float delta_time_sec = GetFrameTime();
     current_time_ms += static_cast<long>(delta_time_sec * 1000);
-    //player& player = game_->get_player();
-    //if (player.get_action() == Action::Waiting) return; // player didn't play yet
-    // tant que le round n'est pas terminé => les bots jouent tout seul ?
-    //std::cout << "he played" << std::endl;
+
+    diamant::player& player = game->get_player();
+    if (player.get_status() == PlayerStatus::WaitingForNextMove) return; // player didn't play yet
+    std::vector<diamant::bot>& bots = game->get_bots();
+    for(auto& bot : bots)
+    {
+        if (bot.get_status() == PlayerStatus::Inactive) continue;
+        bot.play();
+    }
+    game->get_round().pick_card();
+    player.set_status(PlayerStatus::WaitingForNextMove);
 }
 
 void game_scene::render()
@@ -35,19 +42,8 @@ void game_scene::render()
     DrawTimer(current_time_ms, 20, BLACK);
     DrawFPS(10, 10);
 
-    diamant::player& player = game->get_player();
-    if (player.get_status() == PlayerStatus::WaitingForNextMove)
-    {
-        if (GuiButton({ 500, 600, 100, 50 }, "Continue"))
-            player.continue_exploring();
-
-        if (GuiButton({ 650, 600, 100, 50 }, "Leave"))
-            player.finish_exploring();
-    }
-
-    const diamant::deck& deck = game->get_round().get_deck();
-
     int idx = 0;
+    const diamant::deck& deck = game->get_round().get_deck();
     for (const auto& card : deck)
     {
         if (!card->is_played()) break;
@@ -55,5 +51,22 @@ void game_scene::render()
         const float x = static_cast<float>(100 + (idx++ * 130));
         const float y = static_cast<float>(300);
         DrawTextureEx(texture, {x,y}, 0.f, 0.5f, RAYWHITE);
+    }
+
+    diamant::player& player = game->get_player();
+    if (player.get_status() == PlayerStatus::WaitingForNextMove)
+    {
+        if (GuiButton({ 500, 600, 100, 50 }, "Continue"))
+        {
+            player.continue_exploring();
+            player.set_status(PlayerStatus::WaitingForIsTurn);
+            std::cout << "player continue" << std::endl;
+        }
+
+        if (GuiButton({ 650, 600, 100, 50 }, "Leave")){
+            player.finish_exploring();
+            player.set_status(PlayerStatus::WaitingForIsTurn);
+            std::cout << "player leave" << std::endl;
+        }
     }
 }
