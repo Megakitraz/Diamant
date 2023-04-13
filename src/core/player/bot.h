@@ -10,9 +10,7 @@ namespace diamant
 
     public:
         bot(float moving_forward_probability);
-
-        void continue_exploring();
-        PlayerAction play() const;
+        void play();
 
     private:
         float moving_forward_probability;
