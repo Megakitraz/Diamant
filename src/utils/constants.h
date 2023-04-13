@@ -14,6 +14,7 @@ constexpr int GAME_DANGER_CARDS = 15;
 constexpr int GAME_RELIC_CARDS = 5;
 constexpr int GAME_CARDS_COUNT = GAME_TREASURE_CARD + GAME_DANGER_CARDS + GAME_RELIC_CARDS;
 
+constexpr int GAME_BOT_COUNT = 3;
 constexpr float GAME_BOT_WAIT_TIME_SEC = 2.0f;
 
 constexpr int GAME_MIN_PLAYER = 1;
