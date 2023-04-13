@@ -1,10 +1,25 @@
-#include "round.h"
+#include "core/round.h"
 #include "core/card/treasure_card.h"
+#include "utils/constants.h"
+#include <assert.h>
 
-game_round::game_round(int id) : id(id)
+diamant::round::round(int id) : id(id) {}
+
+void diamant::round::create_deck()
 {
-    deck_.push_back(std::make_unique<treasure_card>(10));
+    for (int i = 0; i < GAME_TREASURE_CARD; i++)
+        deck.emplace_back(std::make_unique<treasure_card>(i));
+
+    shuffle_cards(deck);
 }
 
-int game_round::get_id() const { return id; }
-deck const& game_round::get_deck() const { return deck_; }
+void diamant::round::pick_card()
+{
+    const bool is_deck_empty = deck.empty();
+    assert( !is_deck_empty && "Deck is empty." );
+    auto card = deck.front().get();
+    card->set_played(true);
+}
+
+int diamant::round::get_id() const { return id; }
+diamant::deck const& diamant::round::get_deck() const { return deck; }
