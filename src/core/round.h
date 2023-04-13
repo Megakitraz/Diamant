@@ -19,6 +19,7 @@ namespace diamant
     private: 
         int id;
         diamant::deck deck;
+        int last_played_card_index;
     };
 
 }
