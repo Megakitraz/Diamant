@@ -7,7 +7,7 @@ lobby_scene::lobby_scene(scene_manager& scene_manager) : scene_manager_(scene_ma
 
 void lobby_scene::activate()
 {
-    lobby_ = std::make_unique<lobby>();
+    lobby = std::make_unique<diamant::lobby>();
 }
 
 void lobby_scene::update() {}

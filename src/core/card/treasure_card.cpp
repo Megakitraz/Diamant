@@ -3,7 +3,7 @@
 #include "utils/logger.h"
 
 treasure_card::treasure_card(int diamonds) : 
-    card(card_type::Treasure), 
+    card(diamant::card_type::Treasure), 
     diamonds(diamonds)
 {
     load_texture();

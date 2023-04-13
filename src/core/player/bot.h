@@ -2,15 +2,20 @@
 
 #include "core/player/player.h"
 
-class bot : public player
+namespace diamant
 {
 
-public:
-    bot(float moving_forward_probability);
+    class bot : public diamant::player
+    {
 
-    void continue_exploring();
-    Action play() const;
+    public:
+        bot(float moving_forward_probability);
 
-private:
-    float moving_forward_probability;
-};
+        void continue_exploring();
+        PlayerAction play() const;
+
+    private:
+        float moving_forward_probability;
+    };
+
+}

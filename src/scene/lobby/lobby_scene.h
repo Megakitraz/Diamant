@@ -16,5 +16,5 @@ class lobby_scene : public scene
     private:
         scene_manager& scene_manager_;
 
-        std::unique_ptr<lobby> lobby_ = nullptr;
+        std::unique_ptr<diamant::lobby> lobby = nullptr;
 };

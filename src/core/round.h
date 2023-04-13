@@ -2,15 +2,23 @@
 
 #include "core/card/deck.h"
 
-class game_round
+namespace diamant
 {
-public:
-    game_round(int id = 1);
 
-    int get_id() const;
-    deck const& get_deck() const;
+    class round
+    {
+    public:
+        round(int id = 1);
 
-private: 
-    int id;
-    deck deck_;
-};
+        void create_deck();
+        void pick_card();
+
+        int get_id() const;
+        deck const& get_deck() const;
+
+    private: 
+        int id;
+        diamant::deck deck;
+    };
+
+}

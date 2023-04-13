@@ -5,23 +5,30 @@
 #include "core/player/bot.h"
 #include "core/round.h"
 
-class game
+namespace diamant
 {
 
-public:
-     game();
+     class game
+     {
 
-     void next_round();
+     public:
+          game();
 
-     player& get_player();
-     std::vector<bot>& get_bots();
-     game_round& get_round();
-     int get_round_count() const;
+          void start();
+          void next_round();
 
-private:
-     player player_;
-     std::vector<bot> bots;
-     game_round round_;
+          diamant::player& get_player();
+          std::vector<bot>& get_bots();
+          diamant::round& get_round();
 
-     int round_count;
-};
+          int get_round_count() const;
+
+     private:
+          diamant::player player;
+          std::vector<bot> bots;
+          diamant::round round;
+
+          int round_count;
+     };
+
+}

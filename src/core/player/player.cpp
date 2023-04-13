@@ -1,24 +1,25 @@
 #include "core/player/player.h"
 
-player::player() : score(0), in_exploration(true), action(Action::Waiting) {}
+diamant::player::player() : score(0), in_exploration(true), status(PlayerStatus::Inactive) {}
 
-void player::continue_exploring()
+void diamant::player::continue_exploring()
 {
-    action = Action::MoveForward;
+    last_action = PlayerAction::MoveForward;
 }
 
-void player::finish_exploring(bool forced)
+void diamant::player::finish_exploring(bool forced)
 {
-    action = Action::Leave;
+    last_action = PlayerAction::Leave;
+    status = PlayerStatus::Inactive;
     in_exploration = false;
     //if !forced
     //  save score in chest
 }
 
-void player::set_score(int score) { this->score = score; }
-void player::set_exploring(bool in_exploration) { this->in_exploration = in_exploration; }
-void player::set_action(Action action) { this->action = action; }
+void diamant::player::set_score(int score) { this->score = score; }
+void diamant::player::set_exploring(bool in_exploration) { this->in_exploration = in_exploration; }
+void diamant::player::set_status(PlayerStatus status) { this->status = status; }
 
-int player::get_score() const { return score; }
-bool player::is_exploring() const{ return in_exploration; }
-Action player::get_action() const { return action; }
+int diamant::player::get_score() const { return score; }
+bool diamant::player::is_exploring() const{ return in_exploration; }
+PlayerStatus diamant::player::get_status() const { return status; }
