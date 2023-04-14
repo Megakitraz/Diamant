@@ -9,26 +9,29 @@ void diamant::bot::play() {
     /* Tirage du choix, proba : moving_forward_probability */
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::discrete_distribution<> dist({0.5,0.5});
+    std::discrete_distribution<> dist({moving_forward_probability,1-moving_forward_probability});
     int choice = dist(gen);
     if (choice == 0) {
         action = PlayerAction::MoveForward;
-        std::cout << "bot pick continue" << std::endl;
     } else {
         action = PlayerAction::Leave;
-        std::cout << "bot pick leave" << std::endl;
     }
+
+    /*std::cout << "[ " << moving_forward_probability << " , " << 1-moving_forward_probability << " ]" << std::endl;
+    std::cout << "dist : " << choice << std::endl;*/
     
     switch (action)
     {
     case PlayerAction::MoveForward:
         // réduire la probabilité de MoveForward
         diamant::player::continue_exploring();
-        std::cout << "bot continue" << std::endl;
+        //std::cout << "bot continue" << std::endl;
+        this->moving_forward_probability -= 0.05f;
         break;
     case PlayerAction::Leave:
         diamant::player::finish_exploring();
-        std::cout << "bot leave" << std::endl;
+        //std::cout << "bot leave" << std::endl;
+        this->moving_forward_probability = 0.8f;
         break;
     default: break;
     }
