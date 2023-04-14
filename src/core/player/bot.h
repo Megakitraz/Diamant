@@ -1,6 +1,8 @@
 #pragma once
 
 #include "core/player/player.h"
+#include <random>
+#include <iostream>
 
 namespace diamant
 {
