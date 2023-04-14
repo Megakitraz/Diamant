@@ -13,6 +13,8 @@ void diamant::game::start()
     round.create_deck();
     round.pick_card();
     player.set_status(PlayerStatus::WaitingForNextMove);
+    for (auto& bot : bots)
+        bot.set_status(PlayerStatus::WaitingForIsTurn);
 }
 
 void diamant::game::next_round()
