@@ -15,6 +15,47 @@ void game_scene::activate()
     game.start();
 }
 
+void draw_player_circle(Vector2 position, int current_diamonds, diamant::player::PlayerStatus status)
+{
+    // Set circle properties
+    int radius = 30;
+    Color color;
+
+    switch (status)
+    {
+    case diamant::player::PlayerStatus::Inactive:
+        color = GRAY;
+        break;
+    default:
+        color = GREEN;
+        break;
+    }
+
+    // Draw circle
+    DrawCircle(position.x, position.y, radius, color);
+
+    // Draw text
+    char text[32];
+    sprintf(text, "%d", current_diamonds);
+    DrawText(text, position.x - MeasureText(text, 20) / 2, position.y - 20, 20, BLACK);
+}
+
+void draw_players(std::vector<diamant::bot> bots)
+{
+    const int screenWidth = 1280;
+    const int screenHeight = 720;
+
+    // Draw player circles
+    for (size_t i = 0; i < bots.size(); i++)
+    {
+        // Calculate circle position based on bot index
+        const float circleX = static_cast<float> (screenWidth) / (bots.size() + 1) * (i + 1);
+        const float circleY = 100.0f;
+
+        draw_player_circle(Vector2{circleX, circleY}, bots[i].get_score(), bots[i].get_status());
+    }
+}
+
 void game_scene::update() 
 {
     const float delta_time_sec = GetFrameTime();
@@ -71,4 +112,7 @@ void game_scene::render()
             std::cout << "player leave" << std::endl;
         }
     }
+    
+    // Afficher les joueurs diamant et total
+    draw_players(game.get_bots());
 }
