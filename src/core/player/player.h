@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core/chest.h"
 #include <string>
 
 namespace diamant
@@ -32,19 +33,18 @@ namespace diamant
         void finish_exploring(bool forced = false);
 
         void set_score(int score);
-        void set_exploring(bool is_exploring);
         void set_status(PlayerStatus action);
 
         const std::string& get_name() const;
         const int get_score() const;
-        const bool is_exploring() const;
+        diamant::chest& get_chest();
         const PlayerStatus get_status() const;
         const PlayerAction get_last_action() const;
 
     private:
         std::string name;
         int score;
-        bool in_exploration;
+        diamant::chest chest;
         PlayerStatus status;
         PlayerAction last_action;
     };
