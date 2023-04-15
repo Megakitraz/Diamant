@@ -3,13 +3,18 @@
 #include <string>
 #include <iostream>
 
-treasure_card::treasure_card(int diamonds) : 
+diamant::treasure_card::treasure_card(int diamonds) : 
     diamonds(diamonds)
 {
     load_texture();
 }
 
-void treasure_card::play()
+const int diamant::treasure_card::get_diamonds() const
+{
+    return diamonds;
+}
+
+void diamant::treasure_card::play()
 {
     diamant::card::play();
     std::cout << "play(): treasure card" << std::endl;
@@ -40,7 +45,7 @@ void treasure_card::play()
     }
 }
 
-void treasure_card::load_texture()
+void diamant::treasure_card::load_texture()
 {
     // TODO: Add error handling
     const std::string texture_path = "../../assets/treasure.png";
