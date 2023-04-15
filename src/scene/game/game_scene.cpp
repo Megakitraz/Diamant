@@ -47,22 +47,31 @@ void game_scene::render()
     const diamant::deck& deck = game.get_deck();
     DrawCards(deck);
 
+    // Affichage des choix pour le joueur
     diamant::player& player = game.get_player();
     if (player.get_status() == PlayerStatus::WaitingForNextMove)
     {
-        if (GuiButton({ 500, 600, 100, 50 }, "Continue"))
+        if (GuiButton({ (1280 - 200) / 2, 600, 100, 50 }, "Continue"))
         {
             player.continue_exploring();
             player.set_status(PlayerStatus::WaitingForIsTurn);
             std::cout << "player continue" << std::endl;
         }
 
-        if (GuiButton({ 650, 600, 100, 50 }, "Leave")){
+        if (GuiButton({ (1280 + 50) / 2, 600, 100, 50 }, "Leave")){
             player.finish_exploring();
             player.set_status(PlayerStatus::WaitingForIsTurn);
             std::cout << "player leave" << std::endl;
         }
     }
- 
+
+    // Affichage du score d'exploration du joueur
+    const int fontSize = 20;
+    const char* scoreText = TextFormat("Score d'exploration : %d", player.get_score());
+    const int textWidth = MeasureText(scoreText, fontSize);
+    DrawText(scoreText, (1280 - textWidth) / 2, 720 - fontSize - 10, fontSize, BLACK);
+
+    
+    // Affichage des score et status des bots
     DrawBots(game.get_bots());
 }
