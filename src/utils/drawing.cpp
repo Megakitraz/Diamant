@@ -1,5 +1,6 @@
 #include "utils/drawing.h"
 #include "utils/time.h"
+#include "utils/constants.h"
 
 void DrawTextCenter(std::string const& text, int fontSize, Color color)
 {
@@ -25,4 +26,38 @@ void DrawRound(int current, int max, int fontSize, Color color)
     const int x = (GetScreenWidth() - text_width) / 2;
     const int y = 10;
     DrawText(round.c_str(), x, y, fontSize, color);
+}
+
+void DrawCards(const diamant::deck& deck)
+{
+    int idx = 0;
+    for (const auto& card : deck)
+    {
+        if (!card->is_played()) break;
+        const Texture2D& texture = card->get_texture();
+        const float x = static_cast<float>(100 + (idx++ * 130));
+        const float y = static_cast<float>(300);
+        DrawTextureEx(texture, {x,y}, 0.f, 0.5f, RAYWHITE);
+    }
+}
+
+void DrawBotCircle(int centerX, int centerY, const diamant::player& player)
+{
+    Color color = (player.get_status() == diamant::player::PlayerStatus::Inactive) ? GRAY : GREEN;
+    DrawCircle(centerX, centerY, GAME_BOT_CIRCLE_RADIUS, color);
+    // Debug diamond count
+    const std::string diamonds_text = std::to_string(player.get_score());
+    DrawText(diamonds_text.c_str(), centerX - MeasureText(diamonds_text.c_str(), 20) / 2, centerY - 20, 20, BLACK);
+}
+
+void DrawBots(const std::vector<diamant::bot>& bots)
+{
+    const float screen_width = static_cast<float>(GetScreenWidth());
+
+    for (int i = 0; i < bots.size(); ++i)
+    {
+        const int centerX = static_cast<int>(screen_width / (bots.size() + 1) * (i + 1));
+        const int centerY = 100;
+        DrawBotCircle(centerX, centerY, bots.at(i));
+    }
 }
