@@ -1,6 +1,8 @@
 #pragma once
 
+#include "core/player/player.h"
 #include <raylib.h>
+#include <vector>
 
 namespace diamant {
 
@@ -15,7 +17,8 @@ namespace diamant {
         Texture2D const& get_texture() const;
 
         virtual void load_texture() = 0;
-        virtual void play();
+        virtual void on_pick();
+        virtual void on_left() = 0;
 
     protected:
         Texture2D card_texture;

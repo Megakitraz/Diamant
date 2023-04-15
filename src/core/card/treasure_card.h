@@ -13,7 +13,8 @@ namespace diamant {
             const int get_initial_diamonds() const;
 
             void load_texture() override;
-            void play() override;
+            void on_pick() override;
+            void on_left() override;
 
         private:
             int diamonds;

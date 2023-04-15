@@ -20,9 +20,9 @@ const int diamant::treasure_card::get_initial_diamonds() const
     return initial_diamonds;
 }
 
-void diamant::treasure_card::play()
+void diamant::treasure_card::on_pick()
 {
-    diamant::card::play();
+    diamant::card::on_pick();
     std::cout << "play(): treasure card" << std::endl;
     std::cout << "  |- initial diamonds: " << diamonds << std::endl;
 
@@ -30,10 +30,12 @@ void diamant::treasure_card::play()
     const int active_players = game.get_active_players();
     std::cout << "  |- active players: " << active_players << std::endl;
 
+    std::cout << diamonds << " / " << active_players << std::endl;
     const auto [diamonds_per_player, remainder] = std::div(diamonds, active_players);
     diamonds = remainder;
     std::cout << "  |- per/player: " << diamonds_per_player << " | remainer: " << remainder << std::endl;
     
+    /*
     std::vector<diamant::bot> &bots = game.get_bots();
 
     for (size_t i = 0; i < bots.size(); i++)
@@ -49,6 +51,14 @@ void diamant::treasure_card::play()
     {
         game.get_player().set_score(game.get_player().get_score()+diamonds_per_player);
     }
+    */
+}
+
+void diamant::treasure_card::on_left()
+{
+    diamant::game& game = diamant::game::instance();
+    std::vector<diamant::player*> gone_player = game.get_gone_players();
+    // Split the diamonds between the players who left
 }
 
 void diamant::treasure_card::load_texture()
