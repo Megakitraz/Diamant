@@ -8,6 +8,7 @@ namespace diamant {
 
     using deck = std::vector<std::unique_ptr<card>>;
 
-    void shuffle_cards(deck& deck);
+    void fill_deck(deck& deck);
+    void shuffle_deck(deck& deck);
 
 }

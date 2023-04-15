@@ -12,7 +12,7 @@ game_scene::game_scene(scene_manager& scene_manager) : scene_manager_(scene_mana
 void game_scene::activate() 
 {
     diamant::game& game = diamant::game::instance();
-    game.start();
+    game.new_round();
 }
 
 void game_scene::update() 
@@ -29,7 +29,7 @@ void game_scene::update()
         if (bot.get_status() == PlayerStatus::Inactive) continue;
         bot.play();
     }
-    game.get_round().pick_card();
+    game.pick_card();
     player.set_status(PlayerStatus::WaitingForNextMove);
 }
 
@@ -38,13 +38,13 @@ void game_scene::render()
     ClearBackground(RAYWHITE);
     
     diamant::game& game = diamant::game::instance();
-    const int current_round_id = game.get_round().get_id();
+    const int current_round_id = game.get_current_round_id();
     const int round_count = game.get_round_count();
     DrawRound(current_round_id, round_count, 20, BLACK);
     DrawTimer(current_time_ms, 20, BLACK);
     DrawFPS(10, 10);
 
-    const diamant::deck& deck = game.get_round().get_deck();
+    const diamant::deck& deck = game.get_deck();
     DrawCards(deck);
 
     diamant::player& player = game.get_player();

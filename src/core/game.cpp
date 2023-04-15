@@ -1,28 +1,43 @@
 #include "core/game.h"
 #include "utils/constants.h"
 #include <algorithm>
+#include <assert.h>
 
-diamant::game::game() : round_count(5) 
+diamant::game::game() : player("Player"), round_count(5), last_played_card_index(-1)
 {
+    // Creating and addings bots in the game
     const float moving_forward_probability = 0.8f;
     for(int i = 0; i<GAME_BOT_COUNT; i++)
-        bots.emplace_back(moving_forward_probability);
+    {
+        std::string name = "Bot #" + std::to_string(i+1);
+        bots.emplace_back(name, moving_forward_probability);
+    }
+    
+    // Filling the deck with cards (treasure, danger, relic)
+    diamant::fill_deck(deck);
+    diamant::shuffle_deck(deck);
 }
 
-void diamant::game::start()
+void diamant::game::new_round()
 {
-    round.create_deck();
     player.set_status(PlayerStatus::WaitingForNextMove);
     for (auto& bot : bots)
         bot.set_status(PlayerStatus::WaitingForIsTurn);
-    round.pick_card();
+
+    new_turn();
 }
 
-void diamant::game::next_round()
+void diamant::game::new_turn()
 {
-    //round next(round_.id + 1);
-    //next_round.deck = create_deck().shuffle();
-    //round_ = std::move(next);
+    pick_card();
+}
+
+void diamant::game::pick_card()
+{
+    const bool is_deck_empty = deck.empty();
+    assert( !is_deck_empty && "Deck is empty." );
+    auto card = deck[++last_played_card_index].get();
+    card->play();
 }
 
 int diamant::game::get_active_players() const 
@@ -37,6 +52,6 @@ int diamant::game::get_active_players() const
 
 diamant::player& diamant::game::get_player(){ return player; }
 std::vector<diamant::bot>& diamant::game::get_bots() { return bots; }
-diamant::round& diamant::game::get_round() { return round; }
-
+diamant::deck& diamant::game::get_deck() { return deck; }
 int diamant::game::get_round_count() const { return round_count; }
+int diamant::game::get_current_round_id() const { return current_round_id; }

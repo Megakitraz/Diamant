@@ -2,7 +2,7 @@
 
 #include "core/player/player.h"
 #include "core/player/bot.h"
-#include "core/round.h"
+#include "core/card/deck.h"
 #include "utils/singleton.h"
 #include <vector>
 
@@ -15,22 +15,27 @@ namespace diamant
      public:
           game();
 
-          void start();
-          void next_round();
+          void new_round();
+          void new_turn();
+          void pick_card();
 
           int get_active_players() const;
-          diamant::player& get_player();
-          std::vector<bot>& get_bots();
-          diamant::round& get_round();
 
+          diamant::player& get_player();
+          std::vector<diamant::bot>& get_bots();
+          diamant::deck& get_deck();
           int get_round_count() const;
+          int get_current_round_id() const;
 
      private:
           diamant::player player;
           std::vector<bot> bots;
-          diamant::round round;
+
+          diamant::deck deck;
+          int last_played_card_index;
 
           int round_count;
+          int current_round_id;
      };
 
 }
