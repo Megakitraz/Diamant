@@ -42,11 +42,13 @@ void DrawCards(const diamant::deck& deck)
 
         if (diamant::treasure_card* treasure = dynamic_cast<diamant::treasure_card*>(card.get()))
         {
-            if (treasure->get_diamonds() == 0) return;
-            const std::string diamonds = std::to_string(treasure->get_diamonds());
+            //if (treasure->get_diamonds() == 0) return;
+            const std::string current_diamonds = std::to_string(treasure->get_diamonds());
+            const std::string initial_diamonds = std::to_string(treasure->get_initial_diamonds());
             const int posX = static_cast<int>(x + 20);
-            const int posY = static_cast<int>(y + 20);
-            DrawText(diamonds.c_str(), posX, posY, 25, WHITE);
+            const int posY = static_cast<int>(y + 25);
+            DrawText(current_diamonds.c_str(), posX, posY, 25, WHITE);
+            DrawText(initial_diamonds.c_str(), posX + 75, posY, 20, LIGHTGRAY);
         }
     }
 }

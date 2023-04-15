@@ -10,12 +10,14 @@ namespace diamant {
             treasure_card(int diamonds);
 
             const int get_diamonds() const;
+            const int get_initial_diamonds() const;
 
             void load_texture() override;
             void play() override;
 
         private:
             int diamonds;
+            int initial_diamonds;
 
     };
 

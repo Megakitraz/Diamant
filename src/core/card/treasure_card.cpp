@@ -4,7 +4,8 @@
 #include <iostream>
 
 diamant::treasure_card::treasure_card(int diamonds) : 
-    diamonds(diamonds)
+    diamonds(diamonds),
+    initial_diamonds(diamonds)
 {
     load_texture();
 }
@@ -12,6 +13,11 @@ diamant::treasure_card::treasure_card(int diamonds) :
 const int diamant::treasure_card::get_diamonds() const
 {
     return diamonds;
+}
+
+const int diamant::treasure_card::get_initial_diamonds() const
+{
+    return initial_diamonds;
 }
 
 void diamant::treasure_card::play()
