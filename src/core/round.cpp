@@ -20,7 +20,7 @@ void diamant::round::pick_card()
     assert( !is_deck_empty && "Deck is empty." );
 
     auto card = deck[++last_played_card_index].get();
-    card->set_played(true);
+    card->play();
 }
 
 int diamant::round::get_id() const { return id; }
