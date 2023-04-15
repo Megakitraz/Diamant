@@ -6,7 +6,7 @@
 diamant::game::game() : player("Player"), round_count(5), last_played_card_index(-1)
 {
     // Creating and addings bots in the game
-    const float moving_forward_probability = 0.8f;
+    const float moving_forward_probability = 1.f;
     for(int i = 0; i<GAME_BOT_COUNT; i++)
     {
         std::string name = "Bot #" + std::to_string(i+1);
