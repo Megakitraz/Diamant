@@ -6,6 +6,8 @@
 #include <raygui/raygui.h>
 #include <algorithm>
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 game_scene::game_scene(scene_manager& scene_manager) : scene_manager_(scene_manager) {}
 
@@ -29,8 +31,14 @@ void game_scene::update()
         if (bot.get_status() == PlayerStatus::Inactive) continue;
         bot.play();
     }
+    std::chrono::seconds waitTime(1);
+    std::this_thread::sleep_for(waitTime);
     game.pick_card();
-    player.set_status(PlayerStatus::WaitingForNextMove);
+    // reset état du joueur si pas leave
+    if (player.get_last_action() != diamant::player::PlayerAction::Leave)
+    {
+        player.set_status(PlayerStatus::WaitingForNextMove);
+    }
 }
 
 void game_scene::render()
