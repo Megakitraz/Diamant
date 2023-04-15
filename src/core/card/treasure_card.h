@@ -6,7 +6,9 @@ class treasure_card : public diamant::card
 {
     public:
         treasure_card(int diamonds);
+
         void load_texture() override;
+        void play() override;
 
     private:
         int diamonds;
