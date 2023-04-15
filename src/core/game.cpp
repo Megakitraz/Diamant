@@ -1,5 +1,6 @@
 #include "core/game.h"
 #include "utils/constants.h"
+#include <algorithm>
 
 diamant::game::game() : round_count(5) 
 {
@@ -11,10 +12,10 @@ diamant::game::game() : round_count(5)
 void diamant::game::start()
 {
     round.create_deck();
-    round.pick_card();
     player.set_status(PlayerStatus::WaitingForNextMove);
     for (auto& bot : bots)
         bot.set_status(PlayerStatus::WaitingForIsTurn);
+    round.pick_card();
 }
 
 void diamant::game::next_round()
@@ -22,6 +23,16 @@ void diamant::game::next_round()
     //round next(round_.id + 1);
     //next_round.deck = create_deck().shuffle();
     //round_ = std::move(next);
+}
+
+int diamant::game::get_active_players() const 
+{ 
+    int active_players = 0;
+    const auto is_active = [](const auto& player) -> bool { return player.get_status() != PlayerStatus::Inactive; };
+    active_players += is_active(player);
+    for (const auto& bot: bots)
+        active_players += is_active(bot);
+    return active_players;
 }
 
 diamant::player& diamant::game::get_player(){ return player; }
