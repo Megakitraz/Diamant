@@ -31,14 +31,7 @@ void game_scene::update()
         if (bot.get_status() == PlayerStatus::Inactive) continue;
         bot.play();
     }
-    std::chrono::seconds waitTime(1);
-    std::this_thread::sleep_for(waitTime);
-    game.pick_card();
-    // reset état du joueur si pas leave
-    if (player.get_last_action() != diamant::player::PlayerAction::Leave)
-    {
-        player.set_status(PlayerStatus::WaitingForNextMove);
-    }
+    game.end_turn();
 }
 
 void game_scene::render()
@@ -60,17 +53,10 @@ void game_scene::render()
     if (player.get_status() == PlayerStatus::WaitingForNextMove)
     {
         if (GuiButton({ (1280 - 200) / 2, 600, 100, 50 }, "Continue"))
-        {
             player.continue_exploring();
-            player.set_status(PlayerStatus::WaitingForIsTurn);
-            std::cout << "player continue" << std::endl;
-        }
 
-        if (GuiButton({ (1280 + 50) / 2, 600, 100, 50 }, "Leave")){
+        if (GuiButton({ (1280 + 50) / 2, 600, 100, 50 }, "Leave"))
             player.finish_exploring();
-            player.set_status(PlayerStatus::WaitingForIsTurn);
-            std::cout << "player leave" << std::endl;
-        }
     }
 
     // Affichage du score d'exploration du joueur
@@ -79,7 +65,6 @@ void game_scene::render()
     const int textWidth = MeasureText(scoreText, fontSize);
     DrawText(scoreText, (1280 - textWidth) / 2, 720 - fontSize - 10, fontSize, BLACK);
 
-    
     // Affichage des score et status des bots
     DrawBots(game.get_bots());
 }
