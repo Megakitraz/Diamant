@@ -15,7 +15,5 @@ class game_scene : public scene
 
     private:
         scene_manager& scene_manager_;
-        
         long current_time_ms = 0;
-        std::unique_ptr<diamant::game> game = nullptr;
 };
