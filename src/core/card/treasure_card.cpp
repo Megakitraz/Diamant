@@ -1,6 +1,7 @@
 #include "core/card/treasure_card.h"
 #include "core/game.h"
 #include <string>
+#include <iostream>
 
 treasure_card::treasure_card(int diamonds) : 
     diamonds(diamonds)
@@ -42,6 +43,6 @@ void treasure_card::play()
 void treasure_card::load_texture()
 {
     // TODO: Add error handling
-    const std::string texture_path = "../../assets/treasure/" + std::to_string(diamonds) + ".png";
+    const std::string texture_path = "../../assets/treasure.png";
     card_texture = LoadTexture(texture_path.c_str());
 }

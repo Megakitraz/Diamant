@@ -1,6 +1,6 @@
 #include "core/player/bot.h"
 
-diamant::bot::bot(float moving_forward_probability) : player(), moving_forward_probability(moving_forward_probability) {}
+diamant::bot::bot(const std::string& name, float moving_forward_probability) : player(name), moving_forward_probability(moving_forward_probability) {}
 
 void diamant::bot::play() {
     

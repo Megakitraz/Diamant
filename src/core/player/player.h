@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace diamant
 {
 
@@ -16,7 +18,6 @@ namespace diamant
             WaitingForNextMove,
         };
 
-        // TODO: Maybe useless
         enum class PlayerAction
         {
             None,
@@ -24,7 +25,7 @@ namespace diamant
             Leave,
         };
 
-        player();
+        player(const std::string& name);
 
         // TODO: Need to find better names
         void continue_exploring();
@@ -34,11 +35,14 @@ namespace diamant
         void set_exploring(bool is_exploring);
         void set_status(PlayerStatus action);
 
-        int get_score() const;
-        bool is_exploring() const;
-        PlayerStatus get_status() const;
+        const std::string& get_name() const;
+        const int get_score() const;
+        const bool is_exploring() const;
+        const PlayerStatus get_status() const;
+        const PlayerAction get_last_action() const;
 
     private:
+        std::string name;
         int score;
         bool in_exploration;
         PlayerStatus status;
