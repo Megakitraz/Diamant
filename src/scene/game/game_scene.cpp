@@ -24,7 +24,7 @@ void game_scene::update()
 
     diamant::game& game = diamant::game::instance();
     diamant::player& player = game.get_player();
-    if (player.get_status() == PlayerStatus::WaitingForNextMove) return; // player didn't play yet
+    if (player.get_last_action() == PlayerAction::None) return; // player didn't play yet
     std::vector<diamant::bot>& bots = game.get_bots();
     for(auto& bot : bots)
     {

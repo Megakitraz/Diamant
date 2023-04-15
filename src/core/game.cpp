@@ -32,23 +32,19 @@ void diamant::game::new_round()
 
 void diamant::game::new_turn()
 {
-    std::cout << "new turn" << std::endl;
     // Update status
     if (player.get_status() != PlayerStatus::Inactive)
     {
-        std::cout << " - player active" << std::endl;
         player.set_status(PlayerStatus::WaitingForNextMove);
         for (auto& bot : bots) bot.set_status(PlayerStatus::WaitingForIsTurn);
     }
     else
     {
-        std::cout << " - player inactive" << std::endl;
         PlayerStatus next_status = PlayerStatus::WaitingForNextMove;
         for (auto& bot : bots)
         {
             if(bot.get_status() == PlayerStatus::Inactive) continue;
             bot.set_status(next_status);
-            std::cout << " - bot new status" << std::endl;
             next_status = PlayerStatus::WaitingForIsTurn;
         }
     }
