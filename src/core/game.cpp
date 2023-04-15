@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <assert.h>
 
-diamant::game::game() : player("Player"), round_count(5), last_played_card_index(-1)
+diamant::game::game() : player("Player"), round_count(5), current_round_id(1), last_played_card_index(-1)
 {
     // Creating and addings bots in the game
     const float moving_forward_probability = 1.f;
