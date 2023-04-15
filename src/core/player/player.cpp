@@ -1,6 +1,6 @@
 #include "core/player/player.h"
 
-diamant::player::player() : score(0), in_exploration(true), status(PlayerStatus::Inactive) {}
+diamant::player::player(const std::string& name) : name(name), score(0), in_exploration(true), status(PlayerStatus::Inactive) {}
 
 void diamant::player::continue_exploring()
 {
@@ -20,6 +20,8 @@ void diamant::player::set_score(int score) { this->score = score; }
 void diamant::player::set_exploring(bool in_exploration) { this->in_exploration = in_exploration; }
 void diamant::player::set_status(PlayerStatus status) { this->status = status; }
 
-int diamant::player::get_score() const { return score; }
-bool diamant::player::is_exploring() const{ return in_exploration; }
-PlayerStatus diamant::player::get_status() const { return status; }
+const std::string& diamant::player::get_name() const { return name; }
+const int diamant::player::get_score() const { return score; }
+const bool diamant::player::is_exploring() const{ return in_exploration; }
+const PlayerStatus diamant::player::get_status() const { return status; }
+const PlayerAction diamant::player::get_last_action() const { return last_action; }

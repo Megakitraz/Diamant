@@ -56,8 +56,14 @@ void DrawBots(const std::vector<diamant::bot>& bots)
 
     for (int i = 0; i < bots.size(); ++i)
     {
+        const diamant::bot& bot = bots.at(i);
         const int centerX = static_cast<int>(screen_width / (bots.size() + 1) * (i + 1));
-        const int centerY = 100;
-        DrawBotCircle(centerX, centerY, bots.at(i));
+        const int centerY = 120;
+        DrawBotCircle(centerX, centerY, bot);
+
+        const int font_size = 20;
+        const int posX = centerX - MeasureText(bot.get_name().c_str(), font_size) / 2;
+        const int posY = centerY - GAME_BOT_CIRCLE_RADIUS - font_size;
+        DrawText(bot.get_name().c_str(), posX, posY, 20, BLACK);
     }
 }

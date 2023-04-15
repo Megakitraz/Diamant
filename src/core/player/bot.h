@@ -2,7 +2,7 @@
 
 #include "core/player/player.h"
 #include <random>
-#include <iostream>
+#include <string>
 
 namespace diamant
 {
@@ -11,7 +11,7 @@ namespace diamant
     {
 
     public:
-        bot(float moving_forward_probability);
+        bot(const std::string& name, float moving_forward_probability);
         void play();
 
     private:
