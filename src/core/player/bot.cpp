@@ -26,12 +26,12 @@ void diamant::bot::play() {
         // réduire la probabilité de MoveForward
         diamant::player::continue_exploring();
         //std::cout << "bot continue" << std::endl;
-        this->moving_forward_probability -= 0.05f;
+        this->moving_forward_probability -= 0.02f;
         break;
     case PlayerAction::Leave:
         diamant::player::finish_exploring();
         //std::cout << "bot leave" << std::endl;
-        this->moving_forward_probability = 0.8f;
+        this->moving_forward_probability = 1.f;
         break;
     default: break;
     }
