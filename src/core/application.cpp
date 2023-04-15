@@ -1,6 +1,6 @@
 #include "core/application.h"
 #include "scene/splash_screen/splash_screen_scene.h"
-#include "scene/lobby/lobby_scene.h"
+#include "scene/title/title_screen.h"
 #include "scene/game/game_scene.h"
 #include "utils/constants.h"
 #include <raylib.h>
@@ -8,7 +8,7 @@
 application::application()
 {
     scene_manager_.add_scene("splash_screen", std::make_unique<splash_screen_scene>(scene_manager_), true);
-    scene_manager_.add_scene("lobby", std::make_unique<lobby_scene>(scene_manager_));
+    scene_manager_.add_scene("title", std::make_unique<title_screen>(scene_manager_));
     scene_manager_.add_scene("game", std::make_unique<game_scene>(scene_manager_));
 }
 
