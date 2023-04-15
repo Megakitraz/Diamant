@@ -2,15 +2,21 @@
 
 #include "core/card/card.h"
 
-class treasure_card : public diamant::card
-{
-    public:
-        treasure_card(int diamonds);
+namespace diamant {
 
-        void load_texture() override;
-        void play() override;
+    class treasure_card : public diamant::card
+    {
+        public:
+            treasure_card(int diamonds);
 
-    private:
-        int diamonds;
+            const int get_diamonds() const;
 
-};
+            void load_texture() override;
+            void play() override;
+
+        private:
+            int diamonds;
+
+    };
+
+}

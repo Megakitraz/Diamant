@@ -1,6 +1,7 @@
 #include "utils/drawing.h"
 #include "utils/time.h"
 #include "utils/constants.h"
+#include "core/card/treasure_card.h"
 
 void DrawTextCenter(std::string const& text, int fontSize, Color color)
 {
@@ -31,13 +32,22 @@ void DrawRound(int current, int max, int fontSize, Color color)
 void DrawCards(const diamant::deck& deck)
 {
     int idx = 0;
-    for (const auto& card : deck)
+    for (auto& card : deck)
     {
         if (!card->is_played()) break;
         const Texture2D& texture = card->get_texture();
         const float x = static_cast<float>(100 + (idx++ * 130));
         const float y = static_cast<float>(300);
         DrawTextureEx(texture, {x,y}, 0.f, 0.5f, RAYWHITE);
+
+        if (diamant::treasure_card* treasure = dynamic_cast<diamant::treasure_card*>(card.get()))
+        {
+            if (treasure->get_diamonds() == 0) return;
+            const std::string diamonds = std::to_string(treasure->get_diamonds());
+            const int posX = static_cast<int>(x + 20);
+            const int posY = static_cast<int>(y + 20);
+            DrawText(diamonds.c_str(), posX, posY, 25, WHITE);
+        }
     }
 }
 
