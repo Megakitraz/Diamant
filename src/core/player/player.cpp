@@ -17,6 +17,7 @@ void diamant::player::finish_exploring(bool forced)
 
 void diamant::player::set_score(int score) { this->score = score; }
 void diamant::player::set_status(PlayerStatus status) { this->status = status; }
+void diamant::player::set_last_action(PlayerAction action) { this->last_action = action; }
 
 const std::string& diamant::player::get_name() const { return name; }
 const int diamant::player::get_score() const { return score; }

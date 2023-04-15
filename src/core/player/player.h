@@ -34,6 +34,7 @@ namespace diamant
 
         void set_score(int score);
         void set_status(PlayerStatus action);
+        void set_last_action(PlayerAction action);
 
         const std::string& get_name() const;
         const int get_score() const;
