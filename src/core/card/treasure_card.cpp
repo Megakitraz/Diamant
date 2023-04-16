@@ -33,10 +33,10 @@ void diamant::treasure_card::on_pick()
     for (size_t i = 0; i < bots.size(); i++)
     {
       if (bots[i].get_status() != PlayerStatus::Inactive)
-        bots[i].set_score(bots[i].get_score()+diamonds_per_player);
+        bots[i].add_score(diamonds_per_player);
     }
     if (game.get_player().get_status() != PlayerStatus::Inactive)
-        game.get_player().set_score(game.get_player().get_score()+diamonds_per_player);
+        game.get_player().add_score(diamonds_per_player);
 }
 
 void diamant::treasure_card::on_left()

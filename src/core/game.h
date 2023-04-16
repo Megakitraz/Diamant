@@ -29,13 +29,16 @@ namespace diamant
           diamant::player& get_player();
           std::vector<diamant::bot>& get_bots();
           diamant::deck& get_deck();
-          int get_round_count() const;
-          int get_current_round_id() const;
+          const int get_relic_found() const;
+          const int get_round_count() const;
+          const int get_current_round_id() const;
 
      private:
           diamant::player player;
           std::vector<bot> bots;
+          
           std::unordered_map<int, int> danger_occurence;
+          int relic_found;
 
           diamant::deck deck;
           int last_played_card_index;

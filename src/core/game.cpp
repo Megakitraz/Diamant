@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <iostream>
 
-diamant::game::game() : player("Player"), round_count(5), current_round_id(0), last_played_card_index(-1)
+diamant::game::game() : player("Player"), relic_found(0), round_count(5), current_round_id(0), last_played_card_index(-1)
 {
     // Creating and addings bots in the game
     const float moving_forward_probability = 1.f;
@@ -51,8 +51,8 @@ void diamant::game::new_turn()
 void diamant::game::end_round()
 {
     // Reset expedition score
-    player.set_score(0);
-    for (auto& bot : bots) bot.set_score(0);
+    player.reset_score();
+    for (auto& bot : bots) bot.reset_score();
 
     last_played_card_index = -1;
     deck.clear();
@@ -129,5 +129,6 @@ int diamant::game::add_danger(int id)
 diamant::player& diamant::game::get_player(){ return player; }
 std::vector<diamant::bot>& diamant::game::get_bots() { return bots; }
 diamant::deck& diamant::game::get_deck() { return deck; }
-int diamant::game::get_round_count() const { return round_count; }
-int diamant::game::get_current_round_id() const { return current_round_id; }
+const int diamant::game::get_relic_found() const { return relic_found; }
+const int diamant::game::get_round_count() const { return round_count; }
+const int diamant::game::get_current_round_id() const { return current_round_id; }

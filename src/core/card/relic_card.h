@@ -12,6 +12,8 @@ namespace diamant {
             void load_texture() override;
             void on_left() override;
 
+        private:
+            bool found;
     };
 
 }
