@@ -27,3 +27,5 @@ void diamant::relic_card::load_texture()
     const std::string texture_path = "../../assets/relic.png";
     card_texture = LoadTexture(texture_path.c_str());
 }
+
+bool diamant::relic_card::is_found() const { return found; }

@@ -9,6 +9,8 @@ namespace diamant {
         public:
             relic_card();
 
+            bool is_found() const;
+
             void load_texture() override;
             void on_left() override;
 

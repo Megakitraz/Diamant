@@ -1,5 +1,6 @@
 #include "core/game.h"
 #include "core/card/danger_card.h"
+#include "core/card/relic_card.h"
 #include "utils/constants.h"
 #include <algorithm>
 #include <ranges>
@@ -54,9 +55,12 @@ void diamant::game::end_round()
     player.reset_score();
     for (auto& bot : bots) bot.reset_score();
 
+    // Create new deck
     last_played_card_index = -1;
     deck.clear();
     diamant::fill_deck(deck);
+    
+    // Remove already played dangers
     for ( auto [danger_id, occurence] : danger_occurence)
     {
         if (occurence == 0) continue;
@@ -64,9 +68,15 @@ void diamant::game::end_round()
             diamant::danger_card* danger = dynamic_cast<diamant::danger_card*>(card.get());
             return danger && danger->get_danger_id() == danger_id;
         }), deck.end());
-        std::cout << "danger id removed: " << danger_id << " | new deck size: " << deck.size() << std::endl;
     }
     danger_occurence.clear();
+
+    // Remove found relics
+    deck.erase(std::remove_if(deck.begin(), deck.end(), [this](const auto& card) {
+        diamant::relic_card* relic = dynamic_cast<diamant::relic_card*>(card.get());
+        return relic && relic.is_found();
+    }), deck.end());
+
     diamant::shuffle_deck(deck);
 
     new_round();
