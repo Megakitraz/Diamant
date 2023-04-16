@@ -25,12 +25,20 @@ void game_scene::update()
     diamant::game& game = diamant::game::instance();
     diamant::player& player = game.get_player();
     if (player.get_status() == PlayerStatus::WaitingForNextMove) return; // player didn't play yet
+
+    if (sleed_for_sec > 0)
+    {
+        sleed_for_sec -= delta_time_sec;
+        return;
+    }
+
     std::vector<diamant::bot>& bots = game.get_bots();
     for(auto& bot : bots)
     {
         if (bot.get_status() == PlayerStatus::Inactive) continue;
         bot.play();
     }
+    sleed_for_sec = GAME_TURN_WAIT;
     game.end_turn();
 }
 

@@ -81,7 +81,7 @@ void diamant::game::end_turn()
     }
 
     // Wait and go to next turn or round
-    WaitTime(GAME_TURN_WAIT);
+    //WaitTime(GAME_TURN_WAIT);
     const int active_players = get_active_players();
     if( active_players == 0)
         end_round();
