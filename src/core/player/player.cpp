@@ -16,7 +16,8 @@ void diamant::player::finish_exploring(bool forced)
     //  save score in chest
 }
 
-void diamant::player::set_score(int score) { this->score = score; }
+void diamant::player::add_score(int increment) { score += increment; }
+void diamant::player::reset_score() { score = 0; }
 void diamant::player::set_status(PlayerStatus status) { this->status = status; }
 void diamant::player::set_last_action(PlayerAction action) { this->last_action = action; }
 

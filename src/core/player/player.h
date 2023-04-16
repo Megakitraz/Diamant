@@ -32,6 +32,9 @@ namespace diamant
         void continue_exploring();
         void finish_exploring(bool forced = false);
 
+        void add_score(int increment);
+        void reset_score();
+
         void set_score(int score);
         void set_status(PlayerStatus action);
         void set_last_action(PlayerAction action);
