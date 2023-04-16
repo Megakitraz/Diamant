@@ -60,7 +60,7 @@ void DrawCards(diamant::deck& deck)
     static Texture2D background = LoadTexture("../../assets/background.png");
 
     // Affichage de l'image de fond
-    //DrawTexture(background, panelX, panelYScroll, WHITE);
+    DrawTexture(background, panelX, panelYScroll, WHITE);
 
     // Dessin des cartes
     int row = 0;
