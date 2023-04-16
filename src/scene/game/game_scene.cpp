@@ -24,7 +24,7 @@ void game_scene::update()
 
     diamant::game& game = diamant::game::instance();
     diamant::player& player = game.get_player();
-    if (player.get_last_action() == PlayerAction::None) return; // player didn't play yet
+    if (player.get_status() == PlayerStatus::WaitingForNextMove) return; // player didn't play yet
     std::vector<diamant::bot>& bots = game.get_bots();
     for(auto& bot : bots)
     {
@@ -43,7 +43,6 @@ void game_scene::render()
     const int round_count = game.get_round_count();
     DrawRound(current_round_id, round_count, 20, BLACK);
     DrawTimer(current_time_ms, 20, BLACK);
-    DrawFPS(10, 10);
 
     const diamant::deck& deck = game.get_deck();
     DrawCards(deck);

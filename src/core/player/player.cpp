@@ -5,6 +5,7 @@ diamant::player::player(const std::string& name) : name(name), score(0), status(
 void diamant::player::continue_exploring()
 {
     last_action = PlayerAction::MoveForward;
+    status = PlayerStatus::WaitingForIsTurn;
 }
 
 void diamant::player::finish_exploring(bool forced)
