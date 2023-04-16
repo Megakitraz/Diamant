@@ -44,7 +44,7 @@ void game_scene::render()
     DrawRound(current_round_id, round_count, 20, BLACK);
     DrawTimer(current_time_ms, 20, BLACK);
 
-    const diamant::deck& deck = game.get_deck();
+    diamant::deck& deck = game.get_deck();
     DrawCards(deck);
 
     // Affichage des choix pour le joueur

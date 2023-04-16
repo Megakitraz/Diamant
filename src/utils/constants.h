@@ -8,16 +8,23 @@ constexpr int WINDOW_TARGET_FPS = 60;
 /* SPLASH SCREEN CONSTANTS */
 constexpr int SPLASH_SCREEN_DURATION_MS = 500;
 
-/* INGAME CONSTANTS */
-constexpr int GAME_TREASURE_CARD = 15;
+/* PANEL CONSTANTS */
+constexpr int PANEL_HEIGHT = 400;
+constexpr int PANEL_MAX_ROW = 5;
 
-constexpr int GAME_DANGER_TYPE = 5;
-constexpr int GAME_DANGER_OCCURENCE = 3;
-constexpr int GAME_DANGER_CARDS = GAME_DANGER_TYPE * GAME_DANGER_OCCURENCE;
+/* CARDS CONSTANTS */
+constexpr int CARD_WIDTH = 220;
+constexpr int CARD_HEIGHT = 220;
+constexpr int CARD_PADDING = 10;
 
-constexpr int GAME_RELIC_CARDS = 5;
-constexpr int GAME_CARDS_COUNT = GAME_TREASURE_CARD + GAME_DANGER_CARDS + GAME_RELIC_CARDS;
+constexpr int CARD_TREASURE_COUNT = 15;
+constexpr int CARD_DANGER_TYPE = 5;
+constexpr int CARD_DANGER_OCCURENCE = 3;
+constexpr int CARD_DANGER_COUNT = CARD_DANGER_TYPE * CARD_DANGER_OCCURENCE;
+constexpr int CARD_RELIC_COUNT = 5;
+constexpr int CARDS_COUNT = CARD_TREASURE_COUNT + CARD_DANGER_COUNT + CARD_RELIC_COUNT;
 
+/* GAME CONSTANTS */
 constexpr double GAME_TURN_WAIT = 1.0;
 
 constexpr int GAME_BOT_COUNT = 3;

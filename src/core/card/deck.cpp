@@ -7,11 +7,11 @@
 
 void diamant::fill_deck(diamant::deck& deck)
 {
-    for (int i = 0; i < GAME_TREASURE_CARD; ++i)
+    for (int i = 0; i < CARD_TREASURE_COUNT; ++i)
         deck.emplace_back(std::make_unique<treasure_card>(i+1));
 
-    for (int i = 0; i < GAME_DANGER_TYPE; ++i)
-        for (int j = 0; j < GAME_DANGER_OCCURENCE; ++j)
+    for (int i = 0; i < CARD_DANGER_TYPE; ++i)
+        for (int j = 0; j < CARD_DANGER_OCCURENCE; ++j)
             deck.emplace_back(std::make_unique<danger_card>(i+1));
 }
 
