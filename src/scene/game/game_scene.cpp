@@ -69,7 +69,13 @@ void game_scene::render()
     const int fontSize = 20;
     const char* scoreText = TextFormat("Score d'exploration : %d", player.get_score());
     const int textWidth = MeasureText(scoreText, fontSize);
-    DrawText(scoreText, (1280 - textWidth) / 2, 720 - fontSize - 10, fontSize, BLACK);
+    DrawText(scoreText, (1280 - textWidth) / 2, 700 - fontSize - 10, fontSize, BLACK);
+
+    // Affichage du score d'exploration du joueur
+    const int fontSizeb = 20;
+    const char* scoreTextb = TextFormat("Coffre : %d", player.get_chest().get());
+    const int textWidthb = MeasureText(scoreTextb, fontSizeb);
+    DrawText(scoreTextb, (1280 - textWidthb) / 2, 725 - fontSizeb - 10, fontSizeb, BLACK);
 
     // Affichage des score et status des bots
     DrawBots(game.get_bots());
