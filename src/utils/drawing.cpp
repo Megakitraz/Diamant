@@ -42,7 +42,7 @@ void DrawCards(diamant::deck& deck)
     
     // Handle mouse wheel input to adjust panel position
     static int scrollY = 0;
-    const int scrollSpeed = 10;
+    const int scrollSpeed = 40;
     int wheelMove = -GetMouseWheelMove(); // inverser le signe pour inverser le scroll
     if (wheelMove != 0) {
         panelYScroll -= wheelMove * scrollSpeed;
