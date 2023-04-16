@@ -2,6 +2,7 @@
 #include "utils/time.h"
 #include "utils/constants.h"
 #include "core/card/treasure_card.h"
+#include "core/card/relic_card.h"
 #include <iostream>
 
 void DrawTextCenter(std::string const& text, int fontSize, Color color)
@@ -93,7 +94,12 @@ void DrawCards(diamant::deck& deck)
 void DrawCard(std::unique_ptr<diamant::card>& card, const float x, const float y)
 {
     const Texture2D& texture = card->get_texture();
-    DrawTextureEx(texture, {x,y}, 0.f, 0.5f, RAYWHITE);
+    Color tint = RAYWHITE;
+
+    if (diamant::relic_card* relic = dynamic_cast<diamant::relic_card*>(card.get()))
+        if(relic->is_found()) tint = GRAY;
+
+    DrawTextureEx(texture, {x,y}, 0.f, 0.5f, tint);
 
     if (diamant::treasure_card* treasure = dynamic_cast<diamant::treasure_card*>(card.get()))
     {
