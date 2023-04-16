@@ -22,6 +22,7 @@ diamant::game::game() : player("Player"), round_count(5), current_round_id(0), l
 
 void diamant::game::new_round()
 {
+    std::cout << "new round" << std::endl;
     current_round_id++;
 
     player.set_status(PlayerStatus::WaitingForNextMove);
@@ -34,20 +35,7 @@ void diamant::game::new_turn()
 {
     // Update status
     if (player.get_status() != PlayerStatus::Inactive)
-    {
         player.set_status(PlayerStatus::WaitingForNextMove);
-        for (auto& bot : bots) bot.set_status(PlayerStatus::WaitingForIsTurn);
-    }
-    else
-    {
-        PlayerStatus next_status = PlayerStatus::WaitingForNextMove;
-        for (auto& bot : bots)
-        {
-            if(bot.get_status() == PlayerStatus::Inactive) continue;
-            bot.set_status(next_status);
-            next_status = PlayerStatus::WaitingForIsTurn;
-        }
-    }
 
     // Reset last action of all players
     player.set_last_action(PlayerAction::None);
@@ -65,24 +53,39 @@ void diamant::game::end_round()
     // Reset expedition score
     player.set_score(0);
     for (auto& bot : bots) bot.set_score(0);
-    
-    current_round_id++;
+
+    for (auto& card : deck)
+        card->set_played(false);
+    diamant::shuffle_deck(deck);
+    last_played_card_index = -1;
+
+    new_round();
 }
 
 void diamant::game::end_turn()
 {
     // Backwards from the cards
+    // verifier si joueur ou bot leave
     for (auto& card : std::ranges::reverse_view(deck))
     {
         if (!card->is_played()) continue;
         card->on_left();
     }
 
+    // Save score
+    if (player.get_last_action() == PlayerAction::Leave)
+        player.get_chest().add(player.get_score());
+    for (auto& bot : bots)
+    {
+        if (bot.get_last_action() == PlayerAction::Leave)
+            bot.get_chest().add(bot.get_score());
+    }
+
     // Wait and go to next turn or round
     WaitTime(GAME_TURN_WAIT);
     const int active_players = get_active_players();
-    if( active_players == 0 )
-        new_round();
+    if( active_players == 0)
+        end_round();
     else
         new_turn();
 }
