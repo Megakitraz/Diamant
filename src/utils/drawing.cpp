@@ -79,6 +79,11 @@ void DrawCards(diamant::deck& deck)
             row++;
         }
         if (row >= PANEL_MAX_ROW) break;
+
+        // Dessiner un rectangle blanc à côté de la carte
+        const float rectX = static_cast<float>(panelX + col * (CARD_WIDTH + CARD_PADDING));
+        const float rectY = static_cast<float>(panelYScroll + (row * (CARD_HEIGHT + CARD_PADDING)) - scrollY);
+        DrawRectangle(static_cast<int>(rectX), static_cast<int>(rectY), 120, 120, WHITE);
     }
 
     // End scissor mode to stop limiting drawing to the panel area
