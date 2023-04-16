@@ -74,7 +74,7 @@ void diamant::game::end_round()
     // Remove found relics
     deck.erase(std::remove_if(deck.begin(), deck.end(), [this](const auto& card) {
         diamant::relic_card* relic = dynamic_cast<diamant::relic_card*>(card.get());
-        return relic && relic.is_found();
+        return relic && relic->is_found();
     }), deck.end());
 
     diamant::shuffle_deck(deck);
