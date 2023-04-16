@@ -13,7 +13,7 @@ constexpr int GAME_TREASURE_CARD = 15;
 constexpr int GAME_DANGER_CARDS = 15;
 constexpr int GAME_RELIC_CARDS = 5;
 constexpr int GAME_CARDS_COUNT = GAME_TREASURE_CARD + GAME_DANGER_CARDS + GAME_RELIC_CARDS;
-constexpr double GAME_TURN_WAIT = 2.0;
+constexpr double GAME_TURN_WAIT = 1.0;
 
 constexpr int GAME_BOT_COUNT = 3;
 constexpr int GAME_BOT_CIRCLE_RADIUS = 30;
