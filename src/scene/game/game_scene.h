@@ -3,6 +3,7 @@
 #include "scene/scene.h"
 #include "scene/scene_manager.h"
 #include "core/game.h"
+#include "utils/constants.h"
 #include <memory>
 
 class game_scene : public scene
@@ -16,5 +17,5 @@ class game_scene : public scene
     private:
         scene_manager& scene_manager_;
         long current_time_ms = 0;
-        double sleed_for_sec = 0;
+        double sleed_for_sec = GAME_TURN_WAIT;
 };

@@ -1,6 +1,5 @@
 #include "scene/game/game_scene.h"
 #include "core/card/card.h"
-#include "utils/constants.h"
 #include "utils/drawing.h"
 #include <raylib.h>
 #include <raygui/raygui.h>
