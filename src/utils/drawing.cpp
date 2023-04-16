@@ -2,6 +2,7 @@
 #include "utils/time.h"
 #include "utils/constants.h"
 #include "core/card/treasure_card.h"
+#include <iostream>
 
 void DrawTextCenter(std::string const& text, int fontSize, Color color)
 {
@@ -29,16 +30,11 @@ void DrawRound(int current, int max, int fontSize, Color color)
     DrawText(round.c_str(), x, y, fontSize, color);
 }
 
-void DrawCards(const diamant::deck& deck)
+void DrawCards(diamant::deck& deck)
 {
-    const int cardWidth = 150;
-    const int cardHeight = 200;
-    const int padding = 10;
-    const int maxCardsPerRow = WINDOW_WIDTH / cardWidth;
-    const int maxRows = 5;
-    const int panelWidth = maxCardsPerRow * cardWidth + (maxCardsPerRow - 1) * padding;
-    const int panelHeight = 400;
-    int panelX = ((WINDOW_WIDTH - panelWidth) / 2);
+    const int max_cards_per_row = WINDOW_WIDTH / CARD_WIDTH;
+    const int panel_width = max_cards_per_row * CARD_WIDTH + (max_cards_per_row - 1) * CARD_PADDING;
+    int panelX = ((WINDOW_WIDTH - panel_width) / 2);
     int panelY = 200;
 
     // Déclarer une variable statique pour stocker la position y de la panel
@@ -56,9 +52,9 @@ void DrawCards(const diamant::deck& deck)
             panelYScroll = 200;
         }
     }
-
+    
     // Begin scissor mode to limit drawing to the panel area
-    BeginScissorMode(panelX, panelY, panelWidth, panelHeight);
+    BeginScissorMode(panelX, panelY, panel_width, PANEL_HEIGHT);
 
     // Chargement de l'image de fond
     static Texture2D background = LoadTexture("../../assets/background.png");
@@ -72,32 +68,37 @@ void DrawCards(const diamant::deck& deck)
     for (auto& card : deck)
     {
         if (!card->is_played()) break;
-        const Texture2D& texture = card->get_texture();
-        const float x = static_cast<float>(panelX + col * (cardWidth + padding));
-        const float y = static_cast<float>(panelYScroll + (row * (cardHeight + padding)) - scrollY);
-        DrawTextureEx(texture, {x,y}, 0.f, 0.5f, RAYWHITE);
-
-        if (diamant::treasure_card* treasure = dynamic_cast<diamant::treasure_card*>(card.get()))
-        {
-            const std::string current_diamonds = std::to_string(treasure->get_diamonds());
-            const std::string initial_diamonds = std::to_string(treasure->get_initial_diamonds());
-            const int posX = static_cast<int>(x + 20);
-            const int posY = static_cast<int>(y + 25);
-            DrawText(current_diamonds.c_str(), posX, posY, 25, WHITE);
-            DrawText(initial_diamonds.c_str(), posX + 75, posY, 20, LIGHTGRAY);
-        }
+        const float x = static_cast<float>(panelX + col * (CARD_WIDTH + CARD_PADDING));
+        const float y = static_cast<float>(panelYScroll + (row * (CARD_HEIGHT + CARD_PADDING)) - scrollY);
+        DrawCard(card, x, y);
 
         col++;
-        if (col >= maxCardsPerRow)
+        if (col >= max_cards_per_row)
         {
             col = 0;
             row++;
         }
-        if (row >= maxRows) break;
+        if (row >= PANEL_MAX_ROW) break;
     }
 
     // End scissor mode to stop limiting drawing to the panel area
     EndScissorMode();
+}
+
+void DrawCard(std::unique_ptr<diamant::card>& card, const float x, const float y)
+{
+    const Texture2D& texture = card->get_texture();
+    DrawTextureEx(texture, {x,y}, 0.f, 0.5f, RAYWHITE);
+
+    if (diamant::treasure_card* treasure = dynamic_cast<diamant::treasure_card*>(card.get()))
+    {
+        const std::string current_diamonds = std::to_string(treasure->get_diamonds());
+        const std::string initial_diamonds = std::to_string(treasure->get_initial_diamonds());
+        const int posX = static_cast<int>(x + 20);
+        const int posY = static_cast<int>(y + 25);
+        DrawText(current_diamonds.c_str(), posX, posY, 25, WHITE);
+        DrawText(initial_diamonds.c_str(), posX + 75, posY, 20, LIGHTGRAY);
+    }
 }
 
 void DrawBotCircle(int centerX, int centerY, const diamant::player& player)
