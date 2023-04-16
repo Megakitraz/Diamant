@@ -1,4 +1,5 @@
 #include "core/game.h"
+#include "core/card/danger_card.h"
 #include "utils/constants.h"
 #include <algorithm>
 #include <ranges>
@@ -53,10 +54,20 @@ void diamant::game::end_round()
     player.set_score(0);
     for (auto& bot : bots) bot.set_score(0);
 
-    for (auto& card : deck)
-        card->set_played(false);
-    diamant::shuffle_deck(deck);
     last_played_card_index = -1;
+    deck.clear();
+    diamant::fill_deck(deck);
+    for ( auto [danger_id, occurence] : danger_occurence)
+    {
+        if (occurence == 0) continue;
+        deck.erase(std::remove_if(deck.begin(), deck.end(), [danger_id](const auto& card) {
+            diamant::danger_card* danger = dynamic_cast<diamant::danger_card*>(card.get());
+            return danger && danger->get_danger_id() == danger_id;
+        }), deck.end());
+        std::cout << "danger id removed: " << danger_id << " | new deck size: " << deck.size() << std::endl;
+    }
+    danger_occurence.clear();
+    diamant::shuffle_deck(deck);
 
     new_round();
 }
@@ -80,8 +91,6 @@ void diamant::game::end_turn()
             bot.get_chest().add(bot.get_score());
     }
 
-    // Wait and go to next turn or round
-    //WaitTime(GAME_TURN_WAIT);
     const int active_players = get_active_players();
     if( active_players == 0)
         end_round();
@@ -108,6 +117,13 @@ std::vector<diamant::player*> diamant::game::get_gone_players()
         if (bot.get_last_action() == PlayerAction::Leave) 
             gone_players.push_back(&bot);
     return gone_players;
+}
+
+int diamant::game::add_danger(int id)
+{
+    // operator[] will create a new entry if the key doesn't exist
+    // int is initialized to 0
+    return ++danger_occurence[id];
 }
 
 diamant::player& diamant::game::get_player(){ return player; }
