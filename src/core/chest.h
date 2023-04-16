@@ -7,6 +7,7 @@ namespace diamant
         public:
             chest();
 
+            const int get() const;
             void add(int diamonds);
             void clear();
 
