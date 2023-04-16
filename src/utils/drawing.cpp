@@ -52,12 +52,17 @@ void DrawCards(diamant::deck& deck)
             panelYScroll = 200;
         }
     }
-
-    DrawRectangleLines(panelX, panelY, panel_width, PANEL_HEIGHT, BLACK);
-
+    
     // Begin scissor mode to limit drawing to the panel area
     BeginScissorMode(panelX, panelY, panel_width, PANEL_HEIGHT);
 
+    // Chargement de l'image de fond
+    static Texture2D background = LoadTexture("../../assets/background.png");
+
+    // Affichage de l'image de fond
+    DrawTexture(background, panelX, panelYScroll, WHITE);
+
+    // Dessin des cartes
     int row = 0;
     int col = 0;
     for (auto& card : deck)
