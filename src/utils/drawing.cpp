@@ -57,11 +57,16 @@ void DrawCards(const diamant::deck& deck)
         }
     }
 
-    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, BLACK);
-
     // Begin scissor mode to limit drawing to the panel area
     BeginScissorMode(panelX, panelY, panelWidth, panelHeight);
 
+    // Chargement de l'image de fond
+    static Texture2D background = LoadTexture("../../assets/background.png");
+
+    // Affichage de l'image de fond
+    DrawTexture(background, panelX, panelYScroll, WHITE);
+
+    // Dessin des cartes
     int row = 0;
     int col = 0;
     for (auto& card : deck)
