@@ -1,9 +1,10 @@
 #include "core/player/bot.h"
+#include <iostream>
 
 diamant::bot::bot(const std::string& name, float moving_forward_probability) : player(name), moving_forward_probability(moving_forward_probability) {}
 
 void diamant::bot::play() {
-    
+
     PlayerAction action = PlayerAction::MoveForward;
 
     /* Tirage du choix, proba : moving_forward_probability */
@@ -25,12 +26,10 @@ void diamant::bot::play() {
     case PlayerAction::MoveForward:
         // réduire la probabilité de MoveForward
         diamant::player::continue_exploring();
-        //std::cout << "bot continue" << std::endl;
-        this->moving_forward_probability -= 0.02f;
+        this->moving_forward_probability -= 0.1f;
         break;
     case PlayerAction::Leave:
         diamant::player::finish_exploring();
-        //std::cout << "bot leave" << std::endl;
         this->moving_forward_probability = 1.f;
         break;
     default: break;

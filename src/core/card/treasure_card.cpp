@@ -23,35 +23,20 @@ const int diamant::treasure_card::get_initial_diamonds() const
 void diamant::treasure_card::on_pick()
 {
     diamant::card::on_pick();
-    std::cout << "play(): treasure card" << std::endl;
-    std::cout << "  |- initial diamonds: " << diamonds << std::endl;
 
     diamant::game& game = diamant::game::instance();
     const int active_players = game.get_active_players();
-    std::cout << "  |- active players: " << active_players << std::endl;
-
-    std::cout << diamonds << " / " << active_players << std::endl;
     const auto [diamonds_per_player, remainder] = std::div(diamonds, active_players);
     diamonds = remainder;
-    std::cout << "  |- per/player: " << diamonds_per_player << " | remainer: " << remainder << std::endl;
     
-    /*
     std::vector<diamant::bot> &bots = game.get_bots();
-
     for (size_t i = 0; i < bots.size(); i++)
     {
-      if (bots[i].get_last_action() != diamant::player::PlayerAction::Leave)
-      {
-        std::cout << " bot : " << i << " old score : " << bots[i].get_score() << std::endl;
+      if (bots[i].get_status() != PlayerStatus::Inactive)
         bots[i].set_score(bots[i].get_score()+diamonds_per_player);
-        std::cout << " bot : " << i << " new score : " << bots[i].get_score() << std::endl;
-      }
     }
-    if (game.get_player().get_last_action() != diamant::player::PlayerAction::Leave)
-    {
+    if (game.get_player().get_status() != PlayerStatus::Inactive)
         game.get_player().set_score(game.get_player().get_score()+diamonds_per_player);
-    }
-    */
 }
 
 void diamant::treasure_card::on_left()

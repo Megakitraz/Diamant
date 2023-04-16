@@ -13,6 +13,7 @@ namespace diamant {
         card();
         virtual ~card();
 
+        void set_played(bool played);
         bool is_played() const;
         Texture2D const& get_texture() const;
 

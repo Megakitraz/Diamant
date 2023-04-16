@@ -22,7 +22,6 @@ diamant::game::game() : player("Player"), round_count(5), current_round_id(0), l
 
 void diamant::game::new_round()
 {
-    std::cout << "new round" << std::endl;
     current_round_id++;
 
     player.set_status(PlayerStatus::WaitingForNextMove);
