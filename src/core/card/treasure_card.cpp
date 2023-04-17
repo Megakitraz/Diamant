@@ -10,15 +10,8 @@ diamant::treasure_card::treasure_card(int diamonds) :
     load_texture();
 }
 
-const int diamant::treasure_card::get_diamonds() const
-{
-    return diamonds;
-}
-
-const int diamant::treasure_card::get_initial_diamonds() const
-{
-    return initial_diamonds;
-}
+const int diamant::treasure_card::get_diamonds() const { return diamonds; }
+const int diamant::treasure_card::get_initial_diamonds() const { return initial_diamonds; }
 
 void diamant::treasure_card::on_pick()
 {
@@ -49,6 +42,6 @@ void diamant::treasure_card::on_left()
 void diamant::treasure_card::load_texture()
 {
     // TODO: Add error handling
-    const std::string texture_path = "../../assets/treasure.png";
-    card_texture = LoadTexture(texture_path.c_str());
+    const std::string texture_path = "treasure.png";
+    card_texture = proxy.load(texture_path);
 }

@@ -23,6 +23,6 @@ void diamant::danger_card::on_left() {}
 void diamant::danger_card::load_texture()
 {
     // TODO: Add error handling
-    const std::string texture_path = "../../assets/danger/" + std::to_string(danger_id) + ".png";
-    card_texture = LoadTexture(texture_path.c_str());
+    const std::string texture_path = "danger/" + std::to_string(danger_id) + ".png";
+    card_texture = proxy.load(texture_path);
 }

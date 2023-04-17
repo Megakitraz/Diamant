@@ -35,3 +35,6 @@ constexpr int GAME_MAX_PLAYER = 8;
 
 constexpr int GAME_MIN_ROUND = 1;
 constexpr int GAME_MAX_ROUND = 5;
+
+/* ASSETS CONSTANTS */
+constexpr char ASSETS_PATH[] = "../../assets/";

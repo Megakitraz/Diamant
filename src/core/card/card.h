@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/player/player.h"
+#include "core/texture_proxy.h"
 #include <raylib.h>
 #include <vector>
 
@@ -23,6 +24,7 @@ namespace diamant {
 
     protected:
         Texture2D card_texture;
+        diamant::texture_proxy proxy;
         bool played;
     };
 
