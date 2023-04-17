@@ -1,7 +1,7 @@
 #pragma once
 
 #include "utils/singleton.h"
-#include "scene/scene_manager.h"
+#include "scenes/scene_manager.h"
 
 class application : public singleton<application>
 {

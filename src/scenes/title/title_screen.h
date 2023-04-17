@@ -1,7 +1,7 @@
 #pragma once
 
-#include "scene/scene.h"
-#include "scene/scene_manager.h"
+#include "scenes/scene.h"
+#include "scenes/scene_manager.h"
 #include <memory>
 
 class title_screen : public scene

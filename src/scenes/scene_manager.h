@@ -1,7 +1,7 @@
 #pragma once
 
 #include <utils/singleton.h>
-#include "scene/scene.h"
+#include "scenes/scene.h"
 #include <unordered_map>
 #include <memory>
 #include <string>

@@ -1,6 +1,6 @@
-#include "scene/splash_screen/splash_screen_scene.h"
+#include "scenes/splash_screen/splash_screen_scene.h"
 #include "utils/drawing.h"
-#include "scene/scene_manager.h"
+#include "scenes/scene_manager.h"
 
 splash_screen_scene::splash_screen_scene(scene_manager& scene_manager) : scene_manager_(scene_manager){}
 

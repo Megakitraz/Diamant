@@ -1,4 +1,4 @@
-#include "scene/scene_manager.h"
+#include "scenes/scene_manager.h"
 #include <assert.h>
 #include <iostream>
 

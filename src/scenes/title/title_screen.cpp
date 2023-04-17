@@ -1,4 +1,4 @@
-#include "scene/title/title_screen.h"
+#include "scenes/title/title_screen.h"
 #include "utils/constants.h"
 #include "utils/drawing.h"
 #include <raygui/raygui.h>

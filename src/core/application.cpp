@@ -1,7 +1,7 @@
 #include "core/application.h"
-#include "scene/splash_screen/splash_screen_scene.h"
-#include "scene/title/title_screen.h"
-#include "scene/game/game_scene.h"
+#include "scenes/splash_screen/splash_screen_scene.h"
+#include "scenes/title/title_screen.h"
+#include "scenes/game/game_scene.h"
 #include "utils/constants.h"
 #include <raylib.h>
 

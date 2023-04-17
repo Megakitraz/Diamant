@@ -1,4 +1,4 @@
-#include "scene/game/game_scene.h"
+#include "scenes/game/game_scene.h"
 #include "core/card/card.h"
 #include "utils/drawing.h"
 #include <raylib.h>
