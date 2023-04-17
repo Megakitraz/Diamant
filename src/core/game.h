@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/player/player.h"
-#include "core/player/bot.h"
+#include "core/player/bot/bot.h"
 #include "core/card/deck.h"
 #include "utils/singleton.h"
 #include <vector>
@@ -9,7 +9,6 @@
 
 namespace diamant
 {
-
      class game : public singleton<game>
      {
 
@@ -46,5 +45,4 @@ namespace diamant
           int round_count;
           int current_round_id;
      };
-
 }

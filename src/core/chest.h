@@ -13,6 +13,5 @@ namespace diamant
 
         private:
             int diamonds;
-
     };
 }

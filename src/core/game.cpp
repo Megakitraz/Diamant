@@ -1,7 +1,10 @@
 #include "core/game.h"
 #include "core/card/danger_card.h"
 #include "core/card/relic_card.h"
+#include "core/player/bot/strategy/easy_bot.h"
+#include "core/player/bot/strategy/medium_bot.h"
 #include "utils/constants.h"
+
 #include <algorithm>
 #include <ranges>
 #include <assert.h>
@@ -10,11 +13,10 @@
 diamant::game::game() : player("Player"), relic_found(0), round_count(5), current_round_id(0), last_played_card_index(-1)
 {
     // Creating and addings bots in the game
-    const float moving_forward_probability = 1.f;
     for(int i = 0; i<GAME_BOT_COUNT; i++)
     {
         std::string name = "Bot #" + std::to_string(i+1);
-        bots.emplace_back(name, moving_forward_probability);
+        bots.emplace_back(name, std::make_unique<diamant::medium_bot>());
     }
     
     // Filling the deck with cards (treasure, danger, relic)
