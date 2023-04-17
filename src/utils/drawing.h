@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/player/player.h"
-#include "core/player/bot.h"
+#include "core/player/bot/bot.h"
 #include "core/card/deck.h"
 #include <vector>
 #include <raylib.h>

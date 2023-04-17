@@ -5,7 +5,6 @@
 
 namespace diamant
 {
-
     class player
     {
 
@@ -52,8 +51,8 @@ namespace diamant
         PlayerStatus status;
         PlayerAction last_action;
     };
-
 }
+
 
 using PlayerStatus = diamant::player::PlayerStatus;
 using PlayerAction = diamant::player::PlayerAction;
