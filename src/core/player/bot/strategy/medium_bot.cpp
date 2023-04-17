@@ -11,7 +11,6 @@ PlayerAction diamant::medium_bot::medium_bot::next_action()
 
     if (choice == 0)
     {
-        std::cout << "continue" << std::endl;
         moving_forward_probability -= 0.1f;
         return PlayerAction::MoveForward;
     }
