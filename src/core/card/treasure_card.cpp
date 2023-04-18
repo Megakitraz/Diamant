@@ -36,7 +36,12 @@ void diamant::treasure_card::on_left()
 {
     diamant::game& game = diamant::game::instance();
     std::vector<diamant::player*> gone_player = game.get_gone_players();
-    // Split the diamonds between the players who left
+    const int left = gone_player.size();
+    if(left<1) return;
+    const auto [diamonds_per_player, remainder] = std::div(diamonds, left);
+    diamonds = remainder;
+    for(diamant::player* p : gone_player)
+        p->add_score(diamonds_per_player);
 }
 
 void diamant::treasure_card::load_texture()
