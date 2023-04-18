@@ -10,6 +10,7 @@
 
 // Helper raylib functions
 void DrawTextCenter(std::string const& text, int fontSize, Color color);
+void DrawTextCenterX(std::string const& text, int y, int fontSize, Color color);
 
 // Helper game functions
 void DrawTimer(long time_ms, int fontSize, Color color);

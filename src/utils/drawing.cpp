@@ -13,6 +13,13 @@ void DrawTextCenter(std::string const& text, int fontSize, Color color)
     DrawText(text.c_str(), x, y, fontSize, color);
 }
 
+void DrawTextCenterX(std::string const& text, int y, int fontSize, Color color)
+{
+    const int text_width = MeasureText(text.c_str(), fontSize);
+    const int x = (GetScreenWidth() - text_width) / 2;
+    DrawText(text.c_str(), x, y, fontSize, color);
+}
+
 void DrawTimer(long time_ms, int fontSize, Color color)
 {
     const std::string time = time_to_string(time_ms);
@@ -33,10 +40,15 @@ void DrawRound(int current, int max, int fontSize, Color color)
 
 void DrawCards(diamant::deck& deck)
 {
-    const int max_cards_per_row = WINDOW_WIDTH / CARD_WIDTH;
-    const int panel_width = max_cards_per_row * CARD_WIDTH + (max_cards_per_row - 1) * CARD_PADDING;
-    int panelX = ((WINDOW_WIDTH - panel_width) / 2);
-    int panelY = 200;
+    const int max_cards_per_row = 5;
+    const int panel_width = static_cast<int>(WINDOW_WIDTH * 0.7);     //max_cards_per_row * CARD_WIDTH + (max_cards_per_row - 1) * CARD_PADDING;
+    int panelX = 220;                               //((WINDOW_WIDTH - panel_width) / 2) + 50;
+    int panelY = 220;
+
+    DrawRectangle(panelX, panelY, panel_width, PANEL_HEIGHT, Fade(WHITE, 0.7f));
+
+    panelX += 5;
+    panelY += 5;
 
     // Déclarer une variable statique pour stocker la position y de la panel
     static int panelYScroll = panelY;
@@ -53,20 +65,20 @@ void DrawCards(diamant::deck& deck)
             panelYScroll = 200;
         }
     }
-    
+
+    static Texture2D backside = LoadTexture("../../assets/backside.png");
+    static Vector2 position = { 50.f, static_cast<float>(panelY) };
+    DrawTextureEx(backside, position, 0.f, 0.5f, WHITE);
+
     // Begin scissor mode to limit drawing to the panel area
     BeginScissorMode(panelX, panelY, panel_width, PANEL_HEIGHT);
 
-    static Texture2D background = LoadTexture("../../assets/background.png");
-    DrawTexture(background, panelX, panelYScroll, WHITE);
-
-    static Texture2D backside = LoadTexture("../../assets/backside.png");
-    static Vector2 position = { static_cast<float>(panelX), static_cast<float>(panelYScroll) };
-    DrawTextureEx(backside, position, 0.f, 0.5f, WHITE);
+    //static Texture2D background = LoadTexture("../../assets/background.png");
+    //DrawTexture(background, panelX, panelYScroll, WHITE);
 
     // Dessin des cartes
     int row = 0;
-    int col = 1;
+    int col = 0;
     for (auto& card : deck)
     {
         if (!card->is_played()) break;
@@ -83,10 +95,10 @@ void DrawCards(diamant::deck& deck)
         if (row >= PANEL_MAX_ROW) break;
     }
 
-        // Dessiner un rectangle blanc à côté de la carte
-        const float rectX = static_cast<float>(panelX + col * (CARD_WIDTH + CARD_PADDING));
-        const float rectY = static_cast<float>(panelYScroll + (row * (CARD_HEIGHT + CARD_PADDING)) - scrollY);
-        DrawRectangle(static_cast<int>(rectX), static_cast<int>(rectY), 120, 120, WHITE);
+    // Dessiner un rectangle blanc à côté de la carte
+    const float rectX = static_cast<float>(panelX + col * (CARD_WIDTH + CARD_PADDING));
+    const float rectY = static_cast<float>(panelYScroll + (row * (CARD_HEIGHT + CARD_PADDING)) - scrollY);
+    DrawRectangle(static_cast<int>(rectX), static_cast<int>(rectY), 120, 120, RAYWHITE);
 
     // End scissor mode to stop limiting drawing to the panel area
     EndScissorMode();

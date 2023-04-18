@@ -13,9 +13,9 @@ constexpr int PANEL_HEIGHT = 400;
 constexpr int PANEL_MAX_ROW = 5;
 
 /* CARDS CONSTANTS */
-constexpr int CARD_WIDTH = 200;
-constexpr int CARD_HEIGHT = 200;
-constexpr int CARD_PADDING = 10;
+constexpr int CARD_WIDTH = 220;
+constexpr int CARD_HEIGHT = 220;
+constexpr int CARD_PADDING = 12;
 
 constexpr int CARD_TREASURE_COUNT = 15;
 constexpr int CARD_DANGER_TYPE = 5;

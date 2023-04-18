@@ -24,6 +24,7 @@ void game_scene::update()
     diamant::game& game = diamant::game::instance();
     diamant::player& player = game.get_player();
     if (player.get_status() == PlayerStatus::WaitingForNextMove) return; // player didn't play yet
+    if (game.is_round_finished()) return; // popup before next round starts
 
     if (sleed_for_sec > 0)
     {
@@ -56,23 +57,19 @@ void game_scene::render()
 
     // Affichage du score d'exploration du joueur
     diamant::player& player = game.get_player();
-    const int fontSize = 20;
-    const char* scoreText = TextFormat("Score d'exploration : %d", player.get_score());
-    const int textWidth = MeasureText(scoreText, fontSize);
-    DrawText(scoreText, (1280 - textWidth) / 2, 700 - fontSize - 10, fontSize, BLACK);
+    const char* player_score_text = TextFormat("Score d'exploration : %d", player.get_score());
+    DrawTextCenterX(player_score_text, WINDOW_HEIGHT - 60, 20, BLACK);
 
     // Affichage du score d'exploration du joueur
-    const int fontSizeb = 20;
-    const char* scoreTextb = TextFormat("Coffre : %d", player.get_chest().get());
-    const int textWidthb = MeasureText(scoreTextb, fontSizeb);
-    DrawText(scoreTextb, (1280 - textWidthb) / 2, 725 - fontSizeb - 10, fontSizeb, BLACK);
+    const char* player_chest_score_text = TextFormat("Coffre : %d", player.get_chest().get());
+    DrawTextCenterX(player_chest_score_text, WINDOW_HEIGHT - 30, 20, BLACK);
 
     // Affichage des score et status des bots
     DrawBots(game.get_bots());
 
     if(game.is_round_finished())
     {
-        const int action = GuiMessageBox({20,20,250,80}, "Fin de la manche", "L'expédition est terminée, retour au campement.", "Continuer l'exploration");
+        const int action = GuiMessageBox({20,20,250,100}, "End of round", "Expedition is over, back to camp.", "Continue");
         if(action == 0 || action == 1)
             game.end_round();
     }
@@ -81,10 +78,10 @@ void game_scene::render()
         // Affichage des choix pour le joueur
         if (player.get_status() == PlayerStatus::WaitingForNextMove)
         {
-            if (GuiButton({ (1280 - 200) / 2, 600, 100, 50 }, "Continue"))
+            if (GuiButton({ (WINDOW_WIDTH - 300) / 2, 670, 100, 50 }, "Continue"))
                 player.continue_exploring();
 
-            if (GuiButton({ (1280 + 50) / 2, 600, 100, 50 }, "Leave"))
+            if (GuiButton({ (WINDOW_WIDTH + 50) / 2, 670, 100, 50 }, "Leave"))
                 player.finish_exploring();
         }    
     }
