@@ -41,7 +41,14 @@ void diamant::treasure_card::on_left()
 
 void diamant::treasure_card::load_texture()
 {
-    // TODO: Add error handling
     const std::string texture_path = "treasure.png";
-    card_texture = proxy.load(texture_path);
+    try
+    {
+        card_texture = proxy.load(texture_path);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        std::exit(EXIT_FAILURE);
+    }
 }

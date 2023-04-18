@@ -22,7 +22,14 @@ void diamant::danger_card::on_left() {}
 
 void diamant::danger_card::load_texture()
 {
-    // TODO: Add error handling
     const std::string texture_path = "danger/" + std::to_string(danger_id) + ".png";
-    card_texture = proxy.load(texture_path);
+    try
+    {
+        card_texture = proxy.load(texture_path);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        std::exit(EXIT_FAILURE);
+    }
 }

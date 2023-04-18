@@ -23,9 +23,16 @@ void diamant::relic_card::on_left()
 
 void diamant::relic_card::load_texture()
 {
-    // TODO: Add error handling
     const std::string texture_path = "relic.png";
-    card_texture = proxy.load(texture_path);
+    try
+    {
+        card_texture = proxy.load(texture_path);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        std::exit(EXIT_FAILURE);
+    }
 }
 
 bool diamant::relic_card::is_found() const { return found; }
