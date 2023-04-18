@@ -44,7 +44,7 @@ void game_scene::update()
 void game_scene::render()
 {
     ClearBackground(RAYWHITE);
-    
+
     diamant::game& game = diamant::game::instance();
     const int current_round_id = game.get_current_round_id();
     const int round_count = game.get_round_count();
@@ -54,18 +54,8 @@ void game_scene::render()
     diamant::deck& deck = game.get_deck();
     DrawCards(deck);
 
-    // Affichage des choix pour le joueur
-    diamant::player& player = game.get_player();
-    if (player.get_status() == PlayerStatus::WaitingForNextMove)
-    {
-        if (GuiButton({ (1280 - 200) / 2, 600, 100, 50 }, "Continue"))
-            player.continue_exploring();
-
-        if (GuiButton({ (1280 + 50) / 2, 600, 100, 50 }, "Leave"))
-            player.finish_exploring();
-    }
-
     // Affichage du score d'exploration du joueur
+    diamant::player& player = game.get_player();
     const int fontSize = 20;
     const char* scoreText = TextFormat("Score d'exploration : %d", player.get_score());
     const int textWidth = MeasureText(scoreText, fontSize);
@@ -79,4 +69,23 @@ void game_scene::render()
 
     // Affichage des score et status des bots
     DrawBots(game.get_bots());
+
+    if(game.is_round_finished())
+    {
+        const int action = GuiMessageBox({20,20,250,80}, "Fin de la manche", "L'expédition est terminée, retour au campement.", "Continuer l'exploration");
+        if(action == 0 || action == 1)
+            game.end_round();
+    }
+    else
+    {
+        // Affichage des choix pour le joueur
+        if (player.get_status() == PlayerStatus::WaitingForNextMove)
+        {
+            if (GuiButton({ (1280 - 200) / 2, 600, 100, 50 }, "Continue"))
+                player.continue_exploring();
+
+            if (GuiButton({ (1280 + 50) / 2, 600, 100, 50 }, "Leave"))
+                player.finish_exploring();
+        }    
+    }
 }

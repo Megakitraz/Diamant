@@ -1,8 +1,8 @@
 #pragma once
 
 /* WINDOW CONSTANTS */
-constexpr int WINDOW_WIDTH = 1280;
-constexpr int WINDOW_HEIGHT = 720;
+constexpr int WINDOW_WIDTH = 1500;
+constexpr int WINDOW_HEIGHT = 800;
 constexpr int WINDOW_TARGET_FPS = 60;
 
 /* SPLASH SCREEN CONSTANTS */

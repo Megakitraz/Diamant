@@ -24,6 +24,8 @@ namespace diamant
           std::vector<diamant::player*> get_gone_players();
 
           int add_danger(int id);
+          bool is_round_finished() const;
+          void set_round_finished(bool finished);
 
           diamant::player& get_player();
           std::vector<diamant::bot>& get_bots();
@@ -44,5 +46,6 @@ namespace diamant
 
           int round_count;
           int current_round_id;
+          bool round_finished;
      };
 }

@@ -15,7 +15,7 @@ void diamant::danger_card::on_pick()
     diamant::game& game = diamant::game::instance();
     const int occurence = game.add_danger(danger_id);
     if (occurence > 1)
-        game.end_round();
+        game.set_round_finished(true);
 }
 
 void diamant::danger_card::on_left() {}
