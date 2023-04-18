@@ -58,8 +58,8 @@ void DrawCards(diamant::deck& deck)
         panelYScroll -= wheelMove * scrollSpeed;
         if (panelYScroll < -400) {
             panelYScroll = -400;
-        } else if (panelYScroll > 200) {
-            panelYScroll = 200;
+        } else if (panelYScroll > 220) {
+            panelYScroll = 220;
         }
     }
 
