@@ -6,7 +6,7 @@ constexpr int WINDOW_HEIGHT = 800;
 constexpr int WINDOW_TARGET_FPS = 60;
 
 /* SPLASH SCREEN CONSTANTS */
-constexpr int SPLASH_SCREEN_DURATION_MS = 500;
+constexpr int SPLASH_SCREEN_DURATION_MS = 1500;
 
 /* PANEL CONSTANTS */
 constexpr int PANEL_HEIGHT = 400;

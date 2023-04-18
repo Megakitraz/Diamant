@@ -17,6 +17,10 @@ void splash_screen_scene::update() {
 void splash_screen_scene::render()
 {
     ClearBackground(RAYWHITE);
-    DrawTextCenter("Splash screen", 20, BLACK);
-    DrawFPS(10, 10);
+    
+    static Texture2D uqac_logo = LoadTexture("../../assets/uqac.png");
+    static Vector2 position = { WINDOW_WIDTH / 2 - uqac_logo.width / 2, WINDOW_HEIGHT / 2 - uqac_logo.height / 2 };
+    DrawTextureEx(uqac_logo, position, 0.f, 1.f, WHITE);
+
+    DrawTextCenterX("Lucas DESHAYES  Louan OURVOUAI  Victor ENJALBERT", WINDOW_HEIGHT - 50, 20, BLACK);
 }
