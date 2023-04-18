@@ -57,15 +57,16 @@ void DrawCards(diamant::deck& deck)
     // Begin scissor mode to limit drawing to the panel area
     BeginScissorMode(panelX, panelY, panel_width, PANEL_HEIGHT);
 
-    // Chargement de l'image de fond
     static Texture2D background = LoadTexture("../../assets/background.png");
-
-    // Affichage de l'image de fond
     DrawTexture(background, panelX, panelYScroll, WHITE);
+
+    static Texture2D backside = LoadTexture("../../assets/backside.png");
+    static Vector2 position = { static_cast<float>(panelX), static_cast<float>(panelYScroll) };
+    DrawTextureEx(backside, position, 0.f, 0.5f, WHITE);
 
     // Dessin des cartes
     int row = 0;
-    int col = 0;
+    int col = 1;
     for (auto& card : deck)
     {
         if (!card->is_played()) break;
@@ -80,12 +81,12 @@ void DrawCards(diamant::deck& deck)
             row++;
         }
         if (row >= PANEL_MAX_ROW) break;
+    }
 
         // Dessiner un rectangle blanc à côté de la carte
         const float rectX = static_cast<float>(panelX + col * (CARD_WIDTH + CARD_PADDING));
         const float rectY = static_cast<float>(panelYScroll + (row * (CARD_HEIGHT + CARD_PADDING)) - scrollY);
         DrawRectangle(static_cast<int>(rectX), static_cast<int>(rectY), 120, 120, WHITE);
-    }
 
     // End scissor mode to stop limiting drawing to the panel area
     EndScissorMode();
