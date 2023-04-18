@@ -45,10 +45,7 @@ void DrawCards(diamant::deck& deck)
     int panelX = 220;                               //((WINDOW_WIDTH - panel_width) / 2) + 50;
     int panelY = 220;
 
-    DrawRectangle(panelX, panelY, panel_width, PANEL_HEIGHT, Fade(WHITE, 0.7f));
-
-    panelX += 5;
-    panelY += 5;
+    DrawRectangle(panelX-5, panelY-5, panel_width+10, PANEL_HEIGHT+5, Fade(WHITE, 0.7f));
 
     // Déclarer une variable statique pour stocker la position y de la panel
     static int panelYScroll = panelY;

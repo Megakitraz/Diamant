@@ -57,11 +57,11 @@ void game_scene::render()
 
     // Affichage du score d'exploration du joueur
     diamant::player& player = game.get_player();
-    const char* player_score_text = TextFormat("Score d'exploration : %d", player.get_score());
+    const char* player_score_text = TextFormat("Expedition score : %d", player.get_score());
     DrawTextCenterX(player_score_text, WINDOW_HEIGHT - 60, 20, BLACK);
 
     // Affichage du score d'exploration du joueur
-    const char* player_chest_score_text = TextFormat("Coffre : %d", player.get_chest().get());
+    const char* player_chest_score_text = TextFormat("Chest : %d", player.get_chest().get());
     DrawTextCenterX(player_chest_score_text, WINDOW_HEIGHT - 30, 20, BLACK);
 
     // Affichage des score et status des bots

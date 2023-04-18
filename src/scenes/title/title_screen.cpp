@@ -12,7 +12,7 @@ void title_screen::update() {}
 void title_screen::render()
 {
     ClearBackground(RAYWHITE);
-    if (GuiButton({ 50, 50, 150, 150 }, "Start Game"))
+    if (GuiButton({ 50, 50, 150, 150 }, "New Game"))
     {
         scene_manager_.switch_to("game");
     }
